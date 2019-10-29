@@ -1,0 +1,18 @@
+1) create model:    user.ts class and add fields with types
+2) create component:  user.component.ts and declare it as @Component with specifying selector (will be used for registering in app.module.ts) and templateUrl (html file) and styleUrls (css files).
+3) register component class in app.module.ts in @NgModule section
+4) fill in some data in html and css files.
+
+5) in component implement onInit method
+6) component is some king of java controller analogue, therefore component injects service and calls its method.
+7) for constructor injection @Injectable annotation is used.
+
+
+
+
+
+
+
+
+Format code: shft alt F
+start server: ng serve
