@@ -31,7 +31,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/")
+    /*@GetMapping(value = "/")
     public String home(Model model, HttpServletRequest request, HttpServletResponse response) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.findByLogin(userDetails.getUsername());
@@ -51,5 +51,5 @@ public class LoginController {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login";
-    }
+    }*/
 }
