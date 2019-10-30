@@ -14,10 +14,10 @@ public class Role {
     
     @Id
     @Column(name = "id")
-    private long id;
+    private Integer id;
 
     @Column(name = "name")
-    private String roleName;
+    private String name;
 
     @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
     private List<User> userList;
@@ -34,20 +34,20 @@ public class Role {
         this.userList = userList;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setName(String name) {
+        this.name = name;
     }
 }
 

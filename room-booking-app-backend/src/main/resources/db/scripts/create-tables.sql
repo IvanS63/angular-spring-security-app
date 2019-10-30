@@ -1,10 +1,10 @@
-CREATE TABLE IF NOT EXISTS sys_role(
-  id integer NOT NULL,
-  name character varying (10) NOT NULL,
-  CONSTRAINT roles_pkey PRIMARY KEY (id)
+CREATE TABLE sys_role(
+  id INTEGER,
+  name VARCHAR (10) NOT NULL,
+  PRIMARY KEY (id)
 )^
 
-CREATE TABLE IF NOT EXISTS sys_user (
+CREATE TABLE sys_user (
     id INTEGER,
     email VARCHAR(50),
     login VARCHAR (10),
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS sys_user (
     ON DELETE CASCADE
     ON UPDATE CASCADE)^
 
-CREATE TABLE IF NOT EXISTS booking_event(
+CREATE TABLE booking_event(
     id INTEGER,
     start_date DATE,
     duration INTEGER,

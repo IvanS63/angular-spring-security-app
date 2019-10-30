@@ -1,10 +1,8 @@
 package com.myapp.roombookingapp.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -22,23 +20,11 @@ import java.util.Properties;
 @PropertySource("classpath:db.properties")
 public class DbConfig {
 
-    @Value("${db.jpa.driver}")
-    private String driverName;
-
-    @Value("${db.url}")
-    private String url;
-
-    @Value("${db.username}")
-    private String username;
-
-    @Value("${db.password}")
-    private String password;
-
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-        emf.setDataSource(dataSource());
+        emf.setDataSource(dataSource);
         emf.setPackagesToScan("com.myapp.roombookingapp.entity");
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         emf.setJpaVendorAdapter(vendorAdapter);
@@ -48,21 +34,20 @@ public class DbConfig {
 
     @Bean
     public DataSource dataSource() {
-
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        return builder
+        return new EmbeddedDatabaseBuilder()
+                .generateUniqueName(true) //TODO investidate why database creation fails if DB name was set via property
                 .setType(EmbeddedDatabaseType.H2) //.HSQLDB or .DERBY are also possible
                 .addScript("classpath:db/scripts/create-tables.sql")
-                //.addScript("classpath:scripts/filestorage/create-stored-procedures.sql")
+                .addScript("classpath:db/scripts/insert-initial-data.sql")
                 .setSeparator("^")
                 .build();
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager() {
+    public PlatformTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactoryBean) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(
-                entityManagerFactoryBean().getObject());
+                entityManagerFactoryBean.getObject());
         return transactionManager;
     }
 
