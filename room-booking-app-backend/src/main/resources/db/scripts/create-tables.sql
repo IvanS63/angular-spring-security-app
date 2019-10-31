@@ -13,11 +13,8 @@ CREATE TABLE sys_user (
     last_name VARCHAR (50),
     birth_date DATE,
     photo VARCHAR (255) DEFAULT 'resources/assets/img/faces/default.png',
-    role_id INTEGER DEFAULT 2,
-    PRIMARY KEY (id),
-    FOREIGN KEY (role_id) REFERENCES sys_role (id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)^
+    PRIMARY KEY (id)
+)^
     
 CREATE TABLE sys_user_role(
     user_id INTEGER,
