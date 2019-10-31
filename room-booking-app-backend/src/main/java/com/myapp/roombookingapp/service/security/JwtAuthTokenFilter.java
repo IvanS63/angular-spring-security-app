@@ -1,4 +1,4 @@
-package com.myapp.roombookingapp.security;
+package com.myapp.roombookingapp.service.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,8 +1,8 @@
-package com.myapp.roombookingapp.service.impl;
+package com.myapp.roombookingapp.service.domain.impl;
 
 import com.myapp.roombookingapp.dao.UserDao;
 import com.myapp.roombookingapp.entity.User;
-import com.myapp.roombookingapp.service.UserService;
+import com.myapp.roombookingapp.service.domain.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

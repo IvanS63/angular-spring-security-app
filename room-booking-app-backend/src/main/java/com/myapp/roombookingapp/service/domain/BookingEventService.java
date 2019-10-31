@@ -1,4 +1,4 @@
-package com.myapp.roombookingapp.service;
+package com.myapp.roombookingapp.service.domain;
 
 /**
  * BookingEventService.

@@ -1,4 +1,4 @@
-package com.myapp.roombookingapp.security;
+package com.myapp.roombookingapp.service.security;
 
 import com.myapp.roombookingapp.entity.User;
 import io.jsonwebtoken.ExpiredJwtException;

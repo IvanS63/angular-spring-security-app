@@ -1,8 +1,8 @@
-package com.myapp.roombookingapp.service.impl;
+package com.myapp.roombookingapp.service.domain.impl;
 
 import com.myapp.roombookingapp.dao.RoleDao;
 import com.myapp.roombookingapp.entity.Role;
-import com.myapp.roombookingapp.service.RoleService;
+import com.myapp.roombookingapp.service.domain.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

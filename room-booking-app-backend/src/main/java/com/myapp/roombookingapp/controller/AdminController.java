@@ -1,7 +1,7 @@
 package com.myapp.roombookingapp.controller;
 
 import com.myapp.roombookingapp.entity.User;
-import com.myapp.roombookingapp.service.UserService;
+import com.myapp.roombookingapp.service.domain.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

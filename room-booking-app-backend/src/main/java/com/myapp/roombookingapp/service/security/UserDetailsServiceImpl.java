@@ -1,4 +1,4 @@
-package com.myapp.roombookingapp.security;
+package com.myapp.roombookingapp.service.security;
 
 import com.myapp.roombookingapp.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
