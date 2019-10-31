@@ -1,7 +1,11 @@
 package com.myapp.roombookingapp.entity;
 
+import com.myapp.roombookingapp.util.enums.RoleName;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -17,21 +21,11 @@ public class Role {
     private Integer id;
 
     @Column(name = "name")
-    private String name;
-
-    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
-    private List<User> userList;
+    @Enumerated(EnumType.STRING)
+    private RoleName name;
 
     public Role() {
 
-    }
-
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
     }
 
     public Integer getId() {
@@ -42,11 +36,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
+    public RoleName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(RoleName name) {
         this.name = name;
     }
 }

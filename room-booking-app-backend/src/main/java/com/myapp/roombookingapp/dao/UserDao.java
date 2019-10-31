@@ -3,6 +3,7 @@ package com.myapp.roombookingapp.dao;
 import com.myapp.roombookingapp.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * UserDao.

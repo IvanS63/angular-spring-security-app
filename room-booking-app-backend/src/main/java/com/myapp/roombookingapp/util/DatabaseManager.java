@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
- * DatabaseManager.
+ * Util class for running H2 console-UI for debugging purposes.
  *
  * @author Ivan_Semenov
  */
@@ -18,7 +18,7 @@ public class DatabaseManager {
 
     @Autowired
     private DataSource dataSource;
-    
+
     @PostConstruct
     public void startDBManager() throws SQLException {
         //get url from generated DB name

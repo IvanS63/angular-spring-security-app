@@ -18,6 +18,13 @@ CREATE TABLE sys_user (
     FOREIGN KEY (role_id) REFERENCES sys_role (id)
     ON DELETE CASCADE
     ON UPDATE CASCADE)^
+    
+CREATE TABLE sys_user_role(
+    user_id INTEGER,
+    role_id INTEGER,
+    FOREIGN KEY (user_id) REFERENCES sys_user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (role_id) REFERENCES sys_role(id) ON DELETE CASCADE ON UPDATE CASCADE
+)^
 
 CREATE TABLE booking_event(
     id INTEGER,

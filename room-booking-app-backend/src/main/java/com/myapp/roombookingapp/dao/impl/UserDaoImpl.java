@@ -1,5 +1,7 @@
 package com.myapp.roombookingapp.dao.impl;
 
+import static java.lang.String.format;
+
 import com.myapp.roombookingapp.dao.UserDao;
 import com.myapp.roombookingapp.entity.User;
 import org.springframework.stereotype.Repository;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * UserDaoImpl.
@@ -15,7 +18,7 @@ import java.util.List;
  */
 @Repository
 public class UserDaoImpl implements UserDao {
-    
+
     @PersistenceContext(name = "myapp-persistence-unit")
     private EntityManager entityManager;
 
@@ -49,9 +52,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByLogin(String login) {
-        return (User) entityManager.createQuery("select u from User u where u.login like :login")
+        User result = (User) entityManager.createQuery("select u from User u where u.login like :login")
                 .setParameter("login", login)
                 .getSingleResult();
+        return Optional.ofNullable(result)
+                .orElseThrow(() -> new IllegalArgumentException(format("No user with login=%s found", login)));
     }
 
 
