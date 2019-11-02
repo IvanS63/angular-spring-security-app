@@ -1,5 +1,6 @@
 package com.myapp.roombookingapp.controller;
 
+import com.myapp.roombookingapp.dto.JwtResponseDto;
 import com.myapp.roombookingapp.dto.LoginRequestDto;
 import com.myapp.roombookingapp.entity.Role;
 import com.myapp.roombookingapp.entity.User;
@@ -7,8 +8,7 @@ import com.myapp.roombookingapp.service.security.JwtProvider;
 import com.myapp.roombookingapp.service.domain.RoleService;
 import com.myapp.roombookingapp.service.domain.UserService;
 import com.myapp.roombookingapp.util.enums.RoleName;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,7 +38,7 @@ import java.util.Set;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
+    private static final Logger log = Logger.getLogger(AuthController.class);
 
     @Autowired
     private UserService userService;
@@ -75,7 +75,7 @@ public class AuthController {
         String jwt = jwtProvider.generateJwtToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        return ResponseEntity.ok().body(Arrays.asList(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponseDto(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
     @PostMapping("/signup")

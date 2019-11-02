@@ -1,7 +1,6 @@
 package com.myapp.roombookingapp.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoggerInterceptor extends HandlerInterceptorAdapter {
 
-    private static Logger log = LoggerFactory.getLogger(LoggerInterceptor.class);
+    private static Logger log = Logger.getLogger(LoggerInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request,

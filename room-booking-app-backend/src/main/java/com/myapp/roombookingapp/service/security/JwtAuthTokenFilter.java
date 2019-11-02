@@ -1,7 +1,6 @@
 package com.myapp.roombookingapp.service.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,7 +30,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
     @Qualifier("userDetailsServiceImpl")
     private UserDetailsService userDetailsServiceImpl;
 
-    private static final Logger log = LoggerFactory.getLogger(JwtAuthTokenFilter.class);
+    private static final Logger log = Logger.getLogger(JwtAuthTokenFilter.class);
 
     /**
      * get JWT token from header
@@ -70,7 +69,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             return authHeader.replace("Bearer ", "");
         } else {
-            log.warn("Incorrect token format: {}", authHeader);
+            log.error("Incorrect token format: token must not be NULL and should start with 'Bearer '");
             return null;
         }
     }
