@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UserComponent } from '../users/user.component';
 import { LoginComponent } from '../login/login.component';
- 
- 
+
+
 const routes: Routes = [
     {
         path: 'dashboard',
@@ -15,7 +15,7 @@ const routes: Routes = [
         component: UserComponent
     },
     {
-        path: 'auth/login',
+        path: 'login',
         component: LoginComponent
     },
     {
@@ -24,7 +24,7 @@ const routes: Routes = [
         pathMatch: 'full'
     }
 ];
- 
+
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]

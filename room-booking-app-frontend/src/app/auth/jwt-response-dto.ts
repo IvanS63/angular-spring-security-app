@@ -1,10 +1,10 @@
 export class JwtResponseDto {
-    jwt: string;
+    token: string;
     login: string;
     authorities: string[];
 
-    constructor(jwt: string, login: string, authorities: string[]) {
-        this.jwt = jwt;
+    constructor(token: string, login: string, authorities: string[]) {
+        this.token = token;
         this.login = login;
         this.authorities = authorities;
     }
