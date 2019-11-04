@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { MenuComponent } from './menu/menu.component';
+import { HttpInterceptorProviders } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { MenuComponent } from './menu/menu.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, HttpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
