@@ -1,5 +1,5 @@
-INSERT INTO sys_role VALUES (1,'ADMIN')^
-INSERT INTO sys_role VALUES (2,'USER')^
+INSERT INTO sys_role VALUES (1,'ROLE_ADMIN')^
+INSERT INTO sys_role VALUES (2,'ROLE_USER')^
 
 --default password:12345
 INSERT INTO sys_user(id, email, login, password, first_name, last_name, birth_date, photo) VALUES

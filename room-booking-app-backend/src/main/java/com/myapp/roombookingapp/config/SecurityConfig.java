@@ -2,7 +2,8 @@ package com.myapp.roombookingapp.config;
 
 import com.myapp.roombookingapp.service.security.JwtAuthEntryPoint;
 import com.myapp.roombookingapp.service.security.JwtAuthTokenFilter;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +27,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @ComponentScan(basePackages = "com.myapp.roombookingapp")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final Logger log = Logger.getLogger(SecurityConfig.class);
+    private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
     @Autowired
     @Qualifier("userDetailsServiceImpl")

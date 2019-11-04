@@ -1,6 +1,7 @@
 package com.myapp.roombookingapp.service.security;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,7 +31,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
     @Qualifier("userDetailsServiceImpl")
     private UserDetailsService userDetailsServiceImpl;
 
-    private static final Logger log = Logger.getLogger(JwtAuthTokenFilter.class);
+    private static final Logger log = LoggerFactory.getLogger(JwtAuthTokenFilter.class);
 
     /**
      * get JWT token from header

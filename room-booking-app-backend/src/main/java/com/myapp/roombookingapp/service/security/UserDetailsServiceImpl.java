@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Custom implementation for Strong {@link UserDetailsService}.
+ * Custom implementation for Spring {@link UserDetailsService}.
  *
  * @author Ivan_Semenov
  */

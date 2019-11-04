@@ -22,15 +22,6 @@ import java.util.Locale;
 @ComponentScan(basePackages = "com.myapp.roombookingapp")
 public class WebAppConfig extends WebMvcConfigurerAdapter{
 
-    @Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
-        resolver.setViewClass(JstlView.class);
-        return resolver;
-    }
-
     @Bean(name = "filterMultipartResolver")
     public CommonsMultipartResolver filterMultipartResolver() {
         CommonsMultipartResolver filterMultipartResolver = new CommonsMultipartResolver();

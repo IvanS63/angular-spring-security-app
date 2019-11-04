@@ -1,12 +1,13 @@
 package com.myapp.roombookingapp.util.enums;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 /**
- * RoleName.
+ * ROLE_ prefix is required by Spring Security {@link PreAuthorize} hasRole parameter.
  *
  * @author Ivan_Semenov
  */
 public enum RoleName {
-    ADMIN,
-    USER;
-
+    ROLE_ADMIN,
+    ROLE_USER
 }

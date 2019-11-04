@@ -8,7 +8,8 @@ import com.myapp.roombookingapp.service.security.JwtProvider;
 import com.myapp.roombookingapp.service.domain.RoleService;
 import com.myapp.roombookingapp.service.domain.UserService;
 import com.myapp.roombookingapp.util.enums.RoleName;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,7 +39,7 @@ import java.util.Set;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private static final Logger log = Logger.getLogger(AuthController.class);
+    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
     private UserService userService;
@@ -89,7 +90,7 @@ public class AuthController {
         Set<Role> roles = new HashSet<>(); 
         Role role = new Role();
         role.setId(3);
-        role.setName(RoleName.ADMIN);
+        role.setName(RoleName.ROLE_ADMIN);
         roles.add(role);
         
         user.setRoles(roles);

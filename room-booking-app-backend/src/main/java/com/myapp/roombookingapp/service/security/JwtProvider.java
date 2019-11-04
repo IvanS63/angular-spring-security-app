@@ -7,7 +7,8 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
@@ -24,7 +25,7 @@ import java.util.Date;
 @PropertySource("classpath:jwt.properties")
 public class JwtProvider {
 
-    private static final Logger log = Logger.getLogger(JwtProvider.class);
+    private static final Logger log = LoggerFactory.getLogger(JwtProvider.class);
 
     @Value("${app.jwtSecret}")
     private String jwtSecret;

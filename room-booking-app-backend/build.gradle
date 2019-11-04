@@ -36,7 +36,8 @@ dependencies {
 
     //Other dependencies
     //Logging for spring MVC
-    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    compile 'org.slf4j:jcl-over-slf4j:1.7.12'
+    compile 'ch.qos.logback:logback-classic:1.1.3'
 
     //validation API
     compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
