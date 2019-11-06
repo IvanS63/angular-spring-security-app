@@ -1,6 +1,5 @@
 package com.myapp.roombookingapp.config;
 
-import com.myapp.roombookingapp.service.security.JwtAuthEntryPoint;
 import com.myapp.roombookingapp.service.security.JwtAuthTokenFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("userDetailsServiceImpl")
     private UserDetailsService userDetailsServiceImpl;
-    
-    @Autowired
-    private JwtAuthEntryPoint unauthorizedHandler;
+
 
     @Bean
     public JwtAuthTokenFilter authTokenFilter() {
@@ -52,9 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated()
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(unauthorizedHandler)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

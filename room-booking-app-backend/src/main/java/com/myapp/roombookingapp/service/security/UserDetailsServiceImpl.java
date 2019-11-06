@@ -5,8 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+
+import static java.lang.String.format;
 
 /**
  * Custom implementation for Spring {@link UserDetailsService}.
@@ -23,6 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) {
-        return userDao.findByLogin(username);
+        return Optional.ofNullable(userDao.findByLogin(username))
+                .orElseThrow(() -> new UsernameNotFoundException(format("No user with login '%s' was found", username)));
     }
 }
