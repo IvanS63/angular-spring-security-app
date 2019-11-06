@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { LoginDto } from '../auth/login-dto';
@@ -25,6 +24,7 @@ export class LoginComponent implements OnInit {
         if (this.tokenStorage.getToken()) {
             this.isLoggedIn = true;
             this.roles = this.tokenStorage.getAuthorities();
+            this.navigateToDashboard();
         }
     }
 
