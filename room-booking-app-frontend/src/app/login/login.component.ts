@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { LoginDto } from '../auth/login-dto';
@@ -6,6 +6,7 @@ import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
+    encapsulation: ViewEncapsulation.None,
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
             },
             error => {
                 console.log(error);
-                this.errorMessage = error.error.message;
+                this.errorMessage = error.message;
                 this.isLoginFailed = true;
             }
         );
