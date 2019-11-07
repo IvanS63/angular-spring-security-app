@@ -4,6 +4,9 @@ import { map } from 'rxjs/operators';
 import { LoginDto } from '../auth/login-dto';
 import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
+import { CookieService } from 'ngx-cookie-service';
+
+const LANG_COOKIE_KEY = "lang";
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -19,7 +22,10 @@ export class LoginComponent implements OnInit {
     roles: string[] = [];
     private loginDto: LoginDto;
 
-    constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
+    constructor(private authService: AuthService,
+        private tokenStorage: TokenStorageService,
+        private router: Router,
+        private cookieService: CookieService) { }
 
     ngOnInit() {
         if (this.tokenStorage.getToken()) {
@@ -53,6 +59,10 @@ export class LoginComponent implements OnInit {
                 this.isLoginFailed = true;
             }
         );
+    }
+
+    changeLanguage(locale: string){
+        this.cookieService.set(LANG_COOKIE_KEY, locale);
     }
 
     reloadPage() {

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import {UserComponent} from './users/user.component';
@@ -27,7 +28,7 @@ import { HttpInterceptorProviders } from './auth/auth.interceptor';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, HttpInterceptorProviders],
+  providers: [UserService, HttpInterceptorProviders, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

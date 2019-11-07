@@ -1,3 +1,5 @@
+@import url("../../../node_modules/flag-icon-css/css/flag-icon.min.css");
+
 html,
 
 body {
@@ -41,4 +43,12 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.form-signin .alert{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.form-signin .flag-icon{
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
