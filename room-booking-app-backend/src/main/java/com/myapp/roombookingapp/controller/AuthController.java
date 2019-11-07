@@ -2,12 +2,9 @@ package com.myapp.roombookingapp.controller;
 
 import com.myapp.roombookingapp.dto.JwtResponseDto;
 import com.myapp.roombookingapp.dto.LoginRequestDto;
-import com.myapp.roombookingapp.entity.Role;
-import com.myapp.roombookingapp.entity.User;
 import com.myapp.roombookingapp.service.security.JwtProvider;
 import com.myapp.roombookingapp.service.domain.RoleService;
 import com.myapp.roombookingapp.service.domain.UserService;
-import com.myapp.roombookingapp.util.enums.RoleName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Controller for handling login/logout requests.
@@ -35,7 +30,7 @@ import java.util.Set;
  * @author Ivan_Semenov
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -77,26 +72,6 @@ public class AuthController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         return ResponseEntity.ok(new JwtResponseDto(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
-    }
-
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody LoginRequestDto loginRequestDto) {
-        
-        User user = new User();
-        user.setId(10);
-        user.setLogin("admin");
-        user.setPassword(encoder.encode("12345"));
-        
-        Set<Role> roles = new HashSet<>(); 
-        Role role = new Role();
-        role.setId(3);
-        role.setName(RoleName.ROLE_ADMIN);
-        roles.add(role);
-        
-        user.setRoles(roles);
-        userService.add(user);
-
-        return ResponseEntity.ok().body(user.getPassword());
     }
 
 }

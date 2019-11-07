@@ -8,19 +8,17 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.myapp.roombookingapp")
-public class WebAppConfig extends WebMvcConfigurerAdapter{
+public class WebAppConfig extends WebMvcConfigurerAdapter {
 
     @Bean(name = "filterMultipartResolver")
     public CommonsMultipartResolver filterMultipartResolver() {
@@ -47,20 +45,37 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
         return localeResolver;
     }
 
+    @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoggerInterceptor());
-
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("lang");
+        localeChangeInterceptor.setParamName(LocaleConstants.COOKIE_KEY);
         registry.addInterceptor(localeChangeInterceptor);
     }
 
+    @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
 
+    /**
+     * to enable sending cookies via request. Required for i18n
+     *
+     * @param registry
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**") //
+                .allowedOrigins("*") //
+                .allowedMethods("OPTIONS", "HEAD", "GET", "PUT", "POST", "DELETE", "PATCH") //
+                .allowedHeaders("*") //
+                .exposedHeaders("WWW-Authenticate") //
+                .allowCredentials(true)
+                .maxAge(TimeUnit.DAYS.toSeconds(1));
+    }
 }
