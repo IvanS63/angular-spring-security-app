@@ -70,6 +70,6 @@ export class LoginComponent implements OnInit {
     }
 
     navigateToDashboard() {
-        this.router.navigateByUrl("dashboard");
+        this.router.navigateByUrl("users");
     }
 }

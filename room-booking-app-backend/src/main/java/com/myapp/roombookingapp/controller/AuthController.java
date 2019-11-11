@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Ivan_Semenov
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 @RequestMapping("/auth")
 public class AuthController {
 

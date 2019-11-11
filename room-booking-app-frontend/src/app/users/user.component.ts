@@ -8,11 +8,11 @@ import { UserService } from './user.service';
     styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-    constructor(private _userService: UserService) { }
+    constructor(private userService: UserService) { }
     users: User[];
 
     getUsers(): void {
-        this._userService.getAllUsers()
+        this.userService.getAllUsers()
             .subscribe((data: User[]) => {
                 this.users = data,
                     console.log(data)
@@ -23,6 +23,18 @@ export class UserComponent implements OnInit {
 
     ngOnInit(): void {
         this.getUsers();
+    }
+
+    deleteUser(id: number) {
+        this.userService.deleteUser(id)
+            .subscribe(
+                data => {
+                    console.log(data);
+                    this.userService.getAllUsers().subscribe((data: User[]) => {
+                        this.users = data
+                    })
+                }, error =>
+                console.error(error));
     }
 
 }
