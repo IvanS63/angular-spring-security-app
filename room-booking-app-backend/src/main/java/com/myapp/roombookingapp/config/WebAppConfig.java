@@ -64,18 +64,13 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * to enable sending cookies via request. Required for i18n
+     * To enable sending i18n cookies and token-headers via requests (also required {@link SecurityConfig#corsConfigurationSource()}.
      *
      * @param registry
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**") //
-                .allowedOrigins("*") //
-                .allowedMethods("OPTIONS", "HEAD", "GET", "PUT", "POST", "DELETE", "PATCH") //
-                .allowedHeaders("*") //
-                .exposedHeaders("WWW-Authenticate") //
-                .allowCredentials(true)
-                .maxAge(TimeUnit.DAYS.toSeconds(1));
+        registry.addMapping("/**")
+                .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
     }
 }
