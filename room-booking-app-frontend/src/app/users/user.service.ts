@@ -8,6 +8,12 @@ import { map } from 'rxjs/operators';
 const USERS_BASE_URL = 'http://localhost:8090/room-booking-app-backend/ui/users';
 const GET_ALL_USERS_URL = '/list';
 const DELETE_USER_URL = '/delete/';
+const ADD_USER_URL = '/add';
+
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
+    withCredentials: true
+};
 
 @Injectable()
 export class UserService {
@@ -16,6 +22,10 @@ export class UserService {
 
     getAllUsers() {
         return this.httpClient.get(USERS_BASE_URL + GET_ALL_USERS_URL);
+    }
+
+    addUser(user: User) {
+        return this.httpClient.post<User>(USERS_BASE_URL + ADD_USER_URL, user, httpOptions);
     }
 
     deleteUser(id: number): Observable<any> {

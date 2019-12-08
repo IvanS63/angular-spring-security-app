@@ -10,6 +10,8 @@ import { UserService } from './user.service';
 export class UserComponent implements OnInit {
     constructor(private userService: UserService) { }
     users: User[];
+    private user: User;
+    form: any = {};
 
     getUsers(): void {
         this.userService.getAllUsers()
@@ -23,6 +25,15 @@ export class UserComponent implements OnInit {
 
     ngOnInit(): void {
         this.getUsers();
+    }
+
+    addUser() {
+        this.user = new User(
+            this.form.login, this.form.name, this.form.email, this.form.birthdate);
+        this.userService.addUser(this.user)
+            .subscribe(response => { console.log(response) },
+                (error) => { console.log(error); }
+            )
     }
 
     deleteUser(id: number) {

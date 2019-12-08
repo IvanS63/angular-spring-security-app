@@ -35,15 +35,15 @@
                             <label for="checkbox1"></label>
                         </span>
                     </td>
-                    <td>{{user.firstName}} {{user.lastName}}</td>
+                    <td>{{user.name}}</td>
                     <td>{{user.email}}</td>
                     <td>89 Chiaroscuro Rd, Portland, USA</td>
                     <td>(171) 555-2222</td>
                     <td>
                         <a href="#editEmployeeModal" data-id={{user.id}} class="edit" data-toggle="modal"><i
                                 class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" data-toggle="#deleteEmployeeModal" [attr.data-user]="user.id" class="delete"
-                            data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
+                        <a href="#deleteEmployeeModal" data-toggle="#deleteEmployeeModal" [attr.data-user]="user.id"
+                            class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
                                 title="Delete">&#xE872;</i></a>
                     </td>
                 </tr>
@@ -67,27 +67,28 @@
 <div id="addEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form name="form" (ngSubmit)="f.form.valid && addUser()" #f="ngForm">
                 <div class="modal-header">
                     <h4 class="modal-title">Add Employee</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <label>Login</label>
+                        <input type="text" class="form-control" name="login" [(ngModel)]="form.login" #login="ngModel" required>
+                    </div>
+                    <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel" required>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" required>
+                        <input type="email" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel" required>
                     </div>
                     <div class="form-group">
                         <label>Address</label>
-                        <textarea class="form-control" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone</label>
-                        <input type="text" class="form-control" required>
+                        <input class="datepicker form-control" data-date-format="mm/dd/yyyy" #birthdate="ngModel" name="birthdate"
+                            [(ngModel)]="form.birthdate" required>S
                     </div>
                 </div>
                 <div class="modal-footer">
