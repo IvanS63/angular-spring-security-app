@@ -28,6 +28,12 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getAll());
     }
 
+    @PostMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
+    public void add(@RequestBody User user) {
+        userService.add(user);
+    }
+
     @DeleteMapping("/delete")
     public void delete(@PathVariable Integer id) {
         userService.remove(id);

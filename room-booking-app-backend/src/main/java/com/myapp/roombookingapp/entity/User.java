@@ -1,23 +1,12 @@
 package com.myapp.roombookingapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -34,9 +23,8 @@ import java.util.stream.Collectors;
 @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements UserDetails {
     @Id
-    //TODO fix sequence creation
-    /*@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "user_gen")
-    @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 1)*/
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "user_gen")
+    @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 1)
     @Column(name = "id", unique = true)
     private Integer id;
 
@@ -49,11 +37,8 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "birth_date")
     @Temporal(TemporalType.DATE)
@@ -140,20 +125,12 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getBirthDate() {

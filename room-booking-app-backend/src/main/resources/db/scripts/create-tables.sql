@@ -9,8 +9,7 @@ CREATE TABLE sys_user (
     email VARCHAR(50),
     login VARCHAR (10),
     password VARCHAR (255) DEFAULT '$2a$10$EblZqNptyYvcLm/VwDCVAuBjzZOI7khzdyGPBr08PpIi0na624b8.',
-    first_name VARCHAR (50),
-    last_name VARCHAR (50),
+    name VARCHAR (50),
     birth_date DATE,
     photo VARCHAR (255) DEFAULT 'resources/assets/img/faces/default.png',
     PRIMARY KEY (id)
@@ -34,6 +33,13 @@ CREATE TABLE booking_event(
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )^
+
+CREATE SEQUENCE user_seq
+   INCREMENT 1
+   START 10
+   MINVALUE 10
+   MAXVALUE 100000
+   CACHE 1^
 
 
 
