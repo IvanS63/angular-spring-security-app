@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './user';
 import { UserService } from './user.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user',
@@ -29,11 +30,14 @@ export class UserComponent implements OnInit {
 
     addUser() {
         this.user = new User(
-            this.form.login, this.form.name, this.form.email, this.form.birthdate);
+            this.form.login, this.form.name, this.form.email);
         this.userService.addUser(this.user)
-            .subscribe(response => { console.log(response) },
+            .subscribe(response => {
+                window.location.reload();
+                console.log(response);
+            },
                 (error) => { console.log(error); }
-            )
+            );
     }
 
     deleteUser(id: number) {
