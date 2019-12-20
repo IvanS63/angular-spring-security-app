@@ -4,7 +4,7 @@ INSERT INTO sys_role VALUES (2,'ROLE_USER')^
 --default password:12345
 INSERT INTO sys_user(id, email, login, password, name, birth_date, photo) VALUES
     (1,'admin@mail.com','admin', '$2a$10$kIMlRgpErZXbSf0c1XTCcu1PBsSwgvajVaXAUlGawteknCkjrAhnC','Admin','1990-01-01','resources/assets/img/faces/face-3.jpg'),
-    (2, 'rooney@mail.com', 'welbeck777', '$2a$10$kIMlRgpErZXbSf0c1XTCcu1PBsSwgvajVaXAUlGawteknCkjrAhnC', 'Wayne Rooney', '1986-02-02','resources/assets/img/faces/face-2.jpg'),
+    (2, 'oridnaryuser@mail.com', 'user', '$2a$10$kIMlRgpErZXbSf0c1XTCcu1PBsSwgvajVaXAUlGawteknCkjrAhnC', 'Ordinary User', '1986-02-02','resources/assets/img/faces/face-2.jpg'),
     (3, 'welbeck@com.com', 'welback777', '$2a$10$kIMlRgpErZXbSf0c1XTCcu1PBsSwgvajVaXAUlGawteknCkjrAhnC', 'Danny Welbeck', '1990-01-01','resources/assets/img/faces/default.png'),
     (4, 'evans@com.com', 'evans777', '$2a$10$kIMlRgpErZXbSf0c1XTCcu1PBsSwgvajVaXAUlGawteknCkjrAhnC', 'Johny Evans', '1981-03-03','resources/assets/img/faces/default.png'),
     (5, 'jones@com.com', 'jones777', '$2a$10$kIMlRgpErZXbSf0c1XTCcu1PBsSwgvajVaXAUlGawteknCkjrAhnC', 'Phil Jones', '1989-04-04','resources/assets/img/faces/default.png'),

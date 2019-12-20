@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from './user';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
     selector: 'app-user',
@@ -9,10 +10,11 @@ import { Router } from '@angular/router';
     styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService, private tokenStorage: TokenStorageService) { }
     users: User[];
     private user: User;
     form: any = {};
+    private authority: string;
 
     getUsers(): void {
         this.userService.getAllUsers()
@@ -26,6 +28,19 @@ export class UserComponent implements OnInit {
 
     ngOnInit(): void {
         this.getUsers();
+        if (this.tokenStorage.getToken()) {
+            this.tokenStorage.getAuthorities().every(role => {
+              if (role === 'ROLE_ADMIN') {
+                this.authority = 'admin';
+                return false;
+              } else if (role === 'ROLE_USER') {
+                this.authority = 'user';
+                return false;
+              }
+              this.authority = 'user';
+              return true;
+            });
+          }
     }
 
     addUser() {

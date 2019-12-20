@@ -5,7 +5,7 @@
                 <div class="col-sm-6">
                     <h2>Manage <b>Employees</b></h2>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" *ngIf="authority === 'admin'">
                     <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
                             class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
                 </div>
@@ -24,7 +24,7 @@
                     <th>Email</th>
                     <th>Address</th>
                     <th>Phone</th>
-                    <th>Actions</th>
+                    <th *ngIf="authority === 'admin'">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,7 +39,7 @@
                     <td>{{user.email}}</td>
                     <td>89 Chiaroscuro Rd, Portland, USA</td>
                     <td>(171) 555-2222</td>
-                    <td>
+                    <td *ngIf="authority === 'admin'">
                         <a href="#editEmployeeModal" data-id={{user.id}} class="edit" data-toggle="modal"><i
                                 class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         <a href="#deleteEmployeeModal" data-toggle="#deleteEmployeeModal" [attr.data-user]="user.id"

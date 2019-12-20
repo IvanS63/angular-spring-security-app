@@ -23,7 +23,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/list")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<List<User>> getAll() {
         return ResponseEntity.ok().body(userService.getAll());
     }
@@ -35,6 +35,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete")
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(@PathVariable Integer id) {
         userService.remove(id);
     }
