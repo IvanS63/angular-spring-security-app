@@ -23,13 +23,13 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void add(User user) {
-        userDAO.merge(user, true);
+        userDAO.add(user);
     }
 
     @Override
     @Transactional
     public void edit(User user) {
-        userDAO.merge(user, false);
+        userDAO.edit(user);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User findByLogin(String login){
+    public User findByLogin(String login) {
         return userDAO.findByLogin(login);
     }
 }

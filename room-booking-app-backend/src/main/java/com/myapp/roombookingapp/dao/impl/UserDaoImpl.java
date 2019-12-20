@@ -4,7 +4,6 @@ import static java.lang.String.format;
 
 import com.myapp.roombookingapp.dao.UserDao;
 import com.myapp.roombookingapp.entity.User;
-import com.myapp.roombookingapp.service.security.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * UserDaoImpl.
@@ -37,12 +35,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void merge(User user, boolean isNew) {
-        if (isNew) {
-            entityManager.persist(user);
-        } else {
-            entityManager.merge(user);
-        }
+    public void add(User user) {
+        entityManager.persist(user);
+    }
+
+    @Override
+    public void edit(User user) {
+        entityManager.merge(user);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class UserDaoImpl implements UserDao {
         List<User> usersByLogin = entityManager.createQuery("select u from User u where u.login like :login")
                 .setParameter("login", login)
                 .getResultList();
-        if (!usersByLogin.isEmpty()){
+        if (!usersByLogin.isEmpty()) {
             return usersByLogin.get(0);
         } else {
             log.warn("No user with login ={} has been found", login);

@@ -30,24 +30,30 @@ export class UserComponent implements OnInit {
         this.getUsers();
         if (this.tokenStorage.getToken()) {
             this.tokenStorage.getAuthorities().every(role => {
-              if (role === 'ROLE_ADMIN') {
-                this.authority = 'admin';
-                return false;
-              } else if (role === 'ROLE_USER') {
+                if (role === 'ROLE_ADMIN') {
+                    this.authority = 'admin';
+                    return false;
+                } else if (role === 'ROLE_USER') {
+                    this.authority = 'user';
+                    return false;
+                }
                 this.authority = 'user';
-                return false;
-              }
-              this.authority = 'user';
-              return true;
+                return true;
             });
-          }
+        }
     }
 
     addUser() {
+        var id = this.form.id;
+        var updateResult;
         this.user = new User(
             this.form.login, this.form.name, this.form.email);
-        this.userService.addUser(this.user)
-            .subscribe(response => {
+        if (id == null) {
+            updateResult = this.userService.addUser(this.user);
+        } else {
+            updateResult = this.userService.updateUser(id, this.user);
+        }
+        updateResult.subscribe(response => {
                 window.location.reload();
                 console.log(response);
             },

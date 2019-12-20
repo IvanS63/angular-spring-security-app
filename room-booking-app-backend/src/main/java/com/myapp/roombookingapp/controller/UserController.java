@@ -34,6 +34,14 @@ public class UserController {
         userService.add(user);
     }
 
+    //TODO check it
+    @PostMapping("/edit/{id}")
+    @PreAuthorize("hasRole('USER')")
+    public void edit(@PathVariable Integer id, @RequestBody User user) {
+        user.setId(id);
+        userService.edit(user);
+    }
+
     @DeleteMapping("/delete")
     @PreAuthorize("hasRole('ADMIN')")
     public void delete(@PathVariable Integer id) {

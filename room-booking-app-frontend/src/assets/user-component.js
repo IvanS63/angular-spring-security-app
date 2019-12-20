@@ -1,8 +1,10 @@
 $(document).on("click", ".delete", function () {
-    console.log($(this));
     var selectedUserId = $(this).data("user");
     $('input[name="userId"]').val( selectedUserId );
-    // As pointed out in comments, 
-    // it is unnecessary to have to manually call the modal.
-    // $('#addBookDialog').modal('show');
+});
+
+$(document).on("click", ".edit", function () {
+    $('input[name="id"]').val( $(this).data("id") );
+    $('input[name="name"]').val( $(this).data("name") );
+    $('input[name="email"]').val( $(this).data("email") );
 });

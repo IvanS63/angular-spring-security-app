@@ -13,7 +13,9 @@ import java.util.Optional;
 public interface UserDao {
     User findById(Integer id);
 
-    void merge(User user, boolean isNew);
+    void add(User user);
+
+    void edit(User user);
 
     void remove(User user);
 

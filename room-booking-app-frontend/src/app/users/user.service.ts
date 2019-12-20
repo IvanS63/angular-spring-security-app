@@ -9,9 +9,10 @@ const USERS_BASE_URL = 'http://localhost:8090/room-booking-app-backend/ui/users'
 const GET_ALL_USERS_URL = '/list';
 const DELETE_USER_URL = '/delete/';
 const ADD_USER_URL = '/add';
+const EDIT_USER_URL = '/edit/';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     withCredentials: true
 };
 
@@ -26,6 +27,10 @@ export class UserService {
 
     addUser(user: User) {
         return this.httpClient.post<User>(USERS_BASE_URL + ADD_USER_URL, user, httpOptions);
+    }
+
+    updateUser(id: number, user: User) {
+        return this.httpClient.post<User>(USERS_BASE_URL + EDIT_USER_URL + id, user, httpOptions);
     }
 
     deleteUser(id: number): Observable<any> {
