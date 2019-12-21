@@ -1,11 +1,13 @@
 package com.myapp.roombookingapp.controller;
 
 import com.myapp.roombookingapp.entity.User;
+import com.myapp.roombookingapp.service.FileService;
 import com.myapp.roombookingapp.service.domain.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private FileService fileService;
 
     @GetMapping("/list")
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
@@ -46,5 +51,11 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     public void delete(@PathVariable Integer id) {
         userService.remove(id);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @PostMapping(value = "/upload", consumes = {"multipart/form-data"})
+    public void upload(@RequestParam("file") MultipartFile file) {
+        fileService.saveFile(file);
     }
 }

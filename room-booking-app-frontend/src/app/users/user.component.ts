@@ -15,6 +15,7 @@ export class UserComponent implements OnInit {
     private user: User;
     form: any = {};
     private authority: string;
+    private file: File;
 
     getUsers(): void {
         this.userService.getAllUsers()
@@ -43,8 +44,14 @@ export class UserComponent implements OnInit {
         }
     }
 
+    fileChanged(e) {
+        this.file = e.target.files[0];
+    }
+
     addUser() {
         var id = this.form.id;
+        var formData = new FormData();
+        formData.append('file', this.file);
         var updateResult;
         this.user = new User(
             this.form.login, this.form.name, this.form.email);
@@ -53,12 +60,14 @@ export class UserComponent implements OnInit {
         } else {
             updateResult = this.userService.updateUser(id, this.user);
         }
+        this.userService.uploadFile(formData)
+            .subscribe(response => console.log(response));
         updateResult.subscribe(response => {
-                window.location.reload();
-                console.log(response);
-            },
-                (error) => { console.log(error); }
-            );
+            //window.location.reload();
+            console.log(response);
+        },
+            (error) => { console.log(error); }
+        );
     }
 
     deleteUser(id: number) {

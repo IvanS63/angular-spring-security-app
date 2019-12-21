@@ -9,18 +9,16 @@ import javax.servlet.ServletContext;
 public class SecurityWebAppInitializer extends AbstractSecurityWebApplicationInitializer {
 
     /**
-     * For file uploading
+     * For file uploading to get through security
      * @param servletContext
      */
     @Override
     protected void beforeSpringSecurityFilterChain(ServletContext servletContext) {
         super.beforeSpringSecurityFilterChain(servletContext);
-
         // CSRF for multipart form data filter:
         FilterRegistration.Dynamic springMultipartFilter;
         springMultipartFilter = servletContext.addFilter(
                 "springMultipartFilter", new MultipartFilter());
         springMultipartFilter.addMappingForUrlPatterns(null, false, "/*");
-
     }
 }

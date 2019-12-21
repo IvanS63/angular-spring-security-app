@@ -10,6 +10,7 @@ const GET_ALL_USERS_URL = '/list';
 const DELETE_USER_URL = '/delete/';
 const ADD_USER_URL = '/add';
 const EDIT_USER_URL = '/edit/';
+const UPLOAD_FILE = '/upload';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -35,6 +36,14 @@ export class UserService {
 
     deleteUser(id: number): Observable<any> {
         return this.httpClient.delete(USERS_BASE_URL + DELETE_USER_URL + id);
+    }
+
+    uploadFile(formData: FormData) {
+        var multipartOptions = {
+            headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data' }),
+            withCredentials: true
+        };
+        return this.httpClient.post<FormData>(USERS_BASE_URL + UPLOAD_FILE, formData);
     }
 
     private handleError(error: Response) {

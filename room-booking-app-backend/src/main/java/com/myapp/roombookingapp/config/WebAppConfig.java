@@ -20,14 +20,6 @@ import java.util.concurrent.TimeUnit;
 @ComponentScan(basePackages = "com.myapp.roombookingapp")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 
-    @Bean(name = "filterMultipartResolver")
-    public CommonsMultipartResolver filterMultipartResolver() {
-        CommonsMultipartResolver filterMultipartResolver = new CommonsMultipartResolver();
-        filterMultipartResolver.setDefaultEncoding("utf-8");
-        // resolver.setMaxUploadSize(512000);
-        return filterMultipartResolver;
-    }
-
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
@@ -43,6 +35,14 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         localeResolver.setCookieName(LocaleConstants.COOKIE_KEY);
         localeResolver.setCookieMaxAge(3600);
         return localeResolver;
+    }
+
+    @Bean(name = "filterMultipartResolver")
+    public CommonsMultipartResolver filterMultipartResolver() {
+        CommonsMultipartResolver filterMultipartResolver = new CommonsMultipartResolver();
+        filterMultipartResolver.setDefaultEncoding("utf-8");
+        //filterMultipartResolver.setMaxUploadSize(512000);
+        return filterMultipartResolver;
     }
 
     @Override
