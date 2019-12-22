@@ -63,7 +63,7 @@ export class UserComponent implements OnInit {
         this.userService.uploadFile(formData)
             .subscribe(response => console.log(response));
         updateResult.subscribe(response => {
-            //window.location.reload();
+            window.location.reload();
             console.log(response);
         },
             (error) => { console.log(error); }
@@ -80,6 +80,7 @@ export class UserComponent implements OnInit {
                     })
                 }, error =>
                 console.error(error));
+        window.location.reload();
     }
 
 }

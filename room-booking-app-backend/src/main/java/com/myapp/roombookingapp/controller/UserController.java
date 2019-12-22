@@ -47,7 +47,7 @@ public class UserController {
         userService.edit(user);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public void delete(@PathVariable Integer id) {
         userService.remove(id);
