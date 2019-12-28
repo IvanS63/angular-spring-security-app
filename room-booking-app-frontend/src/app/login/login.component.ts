@@ -5,6 +5,7 @@ import { LoginDto } from '../auth/login-dto';
 import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { CookieService } from 'ngx-cookie-service';
+import { TranslateService } from '@ngx-translate/core';
 
 const LANG_COOKIE_KEY = "lang";
 
@@ -25,7 +26,17 @@ export class LoginComponent implements OnInit {
     constructor(private authService: AuthService,
         private tokenStorage: TokenStorageService,
         private router: Router,
-        private cookieService: CookieService) { }
+        private cookieService: CookieService,
+        private translateService: TranslateService) {
+        if (cookieService.get(LANG_COOKIE_KEY)) {
+            translateService.setDefaultLang(cookieService.get(LANG_COOKIE_KEY));
+            translateService.use(cookieService.get(LANG_COOKIE_KEY));
+        } else {
+            translateService.setDefaultLang('en');
+            translateService.use('en');
+            cookieService.set(LANG_COOKIE_KEY, "en");
+        }
+    }
 
     ngOnInit() {
         if (this.tokenStorage.getToken()) {
@@ -61,8 +72,10 @@ export class LoginComponent implements OnInit {
         );
     }
 
-    changeLanguage(locale: string){
+    changeLanguage(locale: string) {
         this.cookieService.set(LANG_COOKIE_KEY, locale);
+        this.translateService.use(locale);
+        this.translateService.setDefaultLang(locale);
     }
 
     reloadPage() {

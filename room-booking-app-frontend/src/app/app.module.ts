@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
-import {UserComponent} from './users/user.component';
+import { UserComponent } from './users/user.component';
 import { UserService } from './users/user.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -23,12 +25,25 @@ import { HttpInterceptorProviders } from './auth/auth.interceptor';
     MenuComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [UserService, HttpInterceptorProviders, CookieService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
+
+// required for AOT compilation
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
