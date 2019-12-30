@@ -1,6 +1,14 @@
 {
     "login":{
         "title":"Вход",
+        "login": {
+            "placeholder": "Имя пользователя",
+            "error": "Введите логин"
+        },
+        "password": {
+            "placeholder": "Пароль",
+            "error": "Введите пароль"
+        },
         "submit": "Принять"
     }
 }

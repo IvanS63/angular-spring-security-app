@@ -1,6 +1,14 @@
 {
-    "login":{
-        "title":"Please sign in",
+    "login": {
+        "title": "Please sign in",
+        "login": {
+            "placeholder": "Login",
+            "error": "Login is required"
+        },
+        "password": {
+            "placeholder": "Password",
+            "error": "Password is required"
+        },
         "submit": "Submit"
     }
 }
