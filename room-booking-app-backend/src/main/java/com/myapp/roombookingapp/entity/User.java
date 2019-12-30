@@ -40,10 +40,6 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "birth_date")
-    @Temporal(TemporalType.DATE)
-    private Date birthDate;
-
     @Column(name = "photo")
     private String photo;
     
@@ -53,10 +49,6 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<BookingEvent> bookingEvents;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -133,14 +125,6 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public String getPhoto() {
         return photo;
     }
@@ -155,13 +139,5 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public List<BookingEvent> getBookingEvents() {
-        return bookingEvents;
-    }
-
-    public void setBookingEvents(List<BookingEvent> bookingEvents) {
-        this.bookingEvents = bookingEvents;
     }
 }
