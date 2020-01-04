@@ -1,28 +1,67 @@
 <div class="container">
   <div class="text-center">
     <span class="lead">
-      <form class="form-signin" id="form_login" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
-        novalidate>
+      <form class="form-signin" (ngSubmit)="loginForm.form.valid && onSubmit(loginForm)" #loginForm="ngForm" novalidate>
         <img class="mb-4" src="https://angular.io/assets/images/logos/angular/angular.png" alt="" width="100"
           height="100">
         <h1 class="h3 mb-3 font-weight-normal" [translate]="'login.title'"></h1>
-        <input type="email" id="username" class="form-control" placeholder="{{'login.login.placeholder' | translate}}" class="form-control" name="username"
-          [(ngModel)]="form.username" #username="ngModel" required autofocus="">
-        <div *ngIf="f.submitted && username.invalid">
+        <input type="email" class="form-control" placeholder="{{'login.login.placeholder' | translate}}"
+          class="form-control" name="username" #username="ngModel" ngModel required autofocus="">
+        <div *ngIf="loginForm.submitted && username.invalid">
           <div class="alert alert-danger" *ngIf="username.errors.required" [translate]="'login.login.error'"></div>
         </div>
-        <input name="password" type="password" id="password" class="form-control" placeholder="{{'login.password.placeholder' | translate}}"
-          [(ngModel)]="form.password" #password="ngModel" required minlength="4">
-        <div *ngIf="f.submitted && password.invalid">
+        <input name="password" type="password" id="password" #password="ngModel" class="form-control"
+          placeholder="{{'login.password.placeholder' | translate}}" ngModel required minlength="4">
+        <div *ngIf="loginForm.submitted && password.invalid">
           <div class="alert alert-danger" *ngIf="password.errors.required" [translate]="'login.password.error'"></div>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit" [translate]="'login.submit'"></button>
-        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger" role="alert">
+        <a href="#signupModal" data-toggle="#signupModal" data-toggle="modal" [translate]="'login.signup'"
+          class="h5 mb-3 font-weight-normal"></a>
+        <div *ngIf="loginForm.submitted && isLoginFailed" class="alert alert-danger" role="alert">
           {{errorMessage}}
         </div>
-        <a href="#" (click)="changeLanguage('ru')"><span class="flag-icon flag-icon-ru"> </span> </a>
-        <a href="#" (click)="changeLanguage('en')"><span class="flag-icon flag-icon-us"> </span> </a>
+        <div class="h5 mb-4 font-weight-normal">
+          <a href="#" (click)="changeLanguage('ru')"><span class="flag-icon flag-icon-ru"> </span> </a>
+          <a href="#" (click)="changeLanguage('en')"><span class="flag-icon flag-icon-us"> </span> </a>
+        </div>
       </form>
     </span>
+  </div>
+</div>
+
+<!-- Signup Modal HTML -->
+<div id="signupModal" data-backdrop="static" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="signup(signupForm)" #signupForm="ngForm">
+        <div class="modal-header">
+          <h4 class="modal-title" [translate]="'signup.header'"></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label [translate]="'signup.login'"></label>
+            <input type="text" class="form-control" name="signupLogin" ngModel #signupLogin="ngModel" required>
+          </div>
+          <div class="form-group">
+            <label [translate]="'signup.email'"></label>
+            <input type="email" class="form-control" name="signupEmail" ngModel #signupEmail="ngModel" required>
+          </div>
+          <div class="form-group">
+            <label [translate]="'signup.password'"></label>
+            <input name="signupPassword" type="password" #signupPassword="ngModel" ngModel class="form-control" required
+              minlength="4" ngModel #password="ngModel">
+          </div>
+        </div>
+        <div *ngIf="signupForm.submitted && isSignupFailed" class="alert alert-danger" role="alert">
+            {{errorMessage}}
+          </div>
+        <div class="modal-footer">
+          <input type="button" #closebutton class="btn btn-default" data-dismiss="modal" value="{{'signup.cancel' | translate}}">
+          <input type="submit" class="btn btn-success" [translate]="'signup.sumbit'">
+        </div>
+      </form>
+    </div>
   </div>
 </div>

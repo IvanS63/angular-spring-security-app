@@ -44,7 +44,7 @@ public class User implements UserDetails {
     private String photo;
     
     //TODO refactor cascade type and add unique constraint to role name and logins
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sys_user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

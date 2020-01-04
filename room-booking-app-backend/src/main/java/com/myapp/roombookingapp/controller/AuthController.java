@@ -2,12 +2,18 @@ package com.myapp.roombookingapp.controller;
 
 import com.myapp.roombookingapp.dto.JwtResponseDto;
 import com.myapp.roombookingapp.dto.LoginRequestDto;
+import com.myapp.roombookingapp.dto.SignUpRequestDto;
+import com.myapp.roombookingapp.entity.Role;
+import com.myapp.roombookingapp.entity.User;
+import com.myapp.roombookingapp.exceptions.UserAlreadyExistsException;
 import com.myapp.roombookingapp.service.security.JwtProvider;
 import com.myapp.roombookingapp.service.domain.RoleService;
 import com.myapp.roombookingapp.service.domain.UserService;
+import com.myapp.roombookingapp.util.enums.RoleName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import static java.lang.String.format;
 
 /**
  * Controller for handling login/logout requests.
@@ -38,7 +49,7 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private RoleService roleService;
 
@@ -47,11 +58,10 @@ public class AuthController {
 
     @Autowired
     private JwtProvider jwtProvider;
-    
+
     @Autowired
     private PasswordEncoder encoder;
-    
-    
+
 
     /**
      * Attempt to authenticate with AuthenticationManager bean.
@@ -59,7 +69,7 @@ public class AuthController {
      * Generate JWT token, then return JWT to client
      *
      * @param loginRequest login request
-     * @return 
+     * @return
      */
     @PostMapping(value = "/login")
     public ResponseEntity login(@RequestBody LoginRequestDto loginRequest) {
@@ -73,5 +83,25 @@ public class AuthController {
 
         return ResponseEntity.ok(new JwtResponseDto(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
+
+    //TODO fix 403 after logging with new users
+    @PostMapping("/signup")
+    public ResponseEntity signup(@RequestBody SignUpRequestDto signUpRequestDto) {
+        if (Objects.nonNull(userService.findByLogin(signUpRequestDto.getLogin()))) {
+            throw new UserAlreadyExistsException("User with this login already exists");
+        }
+
+        User user = new User();
+        user.setLogin(signUpRequestDto.getLogin());
+        user.setEmail(signUpRequestDto.getEmail());
+        user.setPassword(encoder.encode(signUpRequestDto.getPassword()));
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleService.findByName(RoleName.ROLE_USER.name()));
+        user.setRoles(roles);
+        userService.add(user);
+
+        return ResponseEntity.ok(user);
+    }
+
 
 }

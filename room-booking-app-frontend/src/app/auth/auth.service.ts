@@ -25,7 +25,7 @@ export class AuthService {
         return this.http.post<JwtResponseDto>(this.loginUrl, credentials, httpOptions);
     }
 
-    signUp(info: SignupDto): Observable<string> {
-        return this.http.post<string>(this.signuoUrl, info, httpOptions);
+    signUp(info: SignupDto): Observable<any> {
+        return this.http.post<any>(this.signuoUrl, info, httpOptions);
     }
 }

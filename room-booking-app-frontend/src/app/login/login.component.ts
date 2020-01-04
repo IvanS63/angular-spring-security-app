@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { LoginDto } from '../auth/login-dto';
@@ -6,6 +6,9 @@ import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateService } from '@ngx-translate/core';
+import { SignupDto } from '../auth/sign-up-dto';
+import { NgForOf } from '@angular/common';
+import { NgForm } from '@angular/forms';
 
 const LANG_COOKIE_KEY = "lang";
 
@@ -16,12 +19,15 @@ const LANG_COOKIE_KEY = "lang";
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    form: any = {};
+
+    @ViewChild('closebutton', { static: false }) closebutton;
     isLoggedIn = false;
     isLoginFailed = false;
+    isSignupFailed = false;
     errorMessage = '';
     roles: string[] = [];
     private loginDto: LoginDto;
+    private signupDto: SignupDto;
 
     constructor(private authService: AuthService,
         private tokenStorage: TokenStorageService,
@@ -46,12 +52,10 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    onSubmit() {
-        console.log(this.form);
-
+    onSubmit(loginForm: NgForm) {
         this.loginDto = new LoginDto(
-            this.form.username,
-            this.form.password);
+            loginForm.value.username,
+            loginForm.value.password);
 
         this.authService.authenticate(this.loginDto).subscribe(
             data => {
@@ -76,6 +80,26 @@ export class LoginComponent implements OnInit {
         this.cookieService.set(LANG_COOKIE_KEY, locale);
         this.translateService.use(locale);
         this.translateService.setDefaultLang(locale);
+    }
+
+    signup(signupForm: NgForm) {
+        this.signupDto = new SignupDto(
+            signupForm.value.signupLogin,
+            signupForm.value.signupPassword,
+            signupForm.value.signupEmail
+        )
+        this.authService.signUp(this.signupDto).subscribe(
+            data => {
+                console.log(data);
+                this.isSignupFailed = false;
+                this.closebutton.nativeElement.click();
+            },
+            error => {
+                this.isSignupFailed = true;
+                this.errorMessage = error.error.message;
+                console.log(error);
+            }
+        )
     }
 
     reloadPage() {

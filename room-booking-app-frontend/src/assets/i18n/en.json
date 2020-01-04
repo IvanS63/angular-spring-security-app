@@ -9,6 +9,16 @@
             "placeholder": "Password",
             "error": "Password is required"
         },
+        "signup": "Sign up",
         "submit": "Submit"
+    },
+    "signup": {
+        "header": "Sign up",
+        "login": "Login",
+        "password": "Password",
+        "second-password": "Please repeat password",
+        "email": "Email",
+        "submit": "Submit",
+        "cancel": "Cancel"
     }
 }

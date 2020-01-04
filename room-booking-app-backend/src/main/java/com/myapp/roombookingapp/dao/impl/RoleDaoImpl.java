@@ -23,7 +23,7 @@ public class RoleDaoImpl implements RoleDao {
     
     @Override
     public Role findByName(String name) {
-        Role result = (Role) entityManager.createQuery("select r from Role r where r.name like :roleName")
+        Role result = (Role) entityManager.createNativeQuery("select * from sys_role where name like :roleName", Role.class)
                 .setParameter("roleName", name)
                 .getSingleResult();
         return Optional.ofNullable(result)
