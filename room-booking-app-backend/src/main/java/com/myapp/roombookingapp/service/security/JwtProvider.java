@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- * JwtProvider.
+ *  This class gets username from Authentication object, then builds JWT Token with username, Date() object, secretKey.
  *
  * @author Ivan_Semenov
  */

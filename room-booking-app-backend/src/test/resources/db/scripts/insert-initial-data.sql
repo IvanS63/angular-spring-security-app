@@ -18,4 +18,9 @@ INSERT INTO sys_user_role (user_id, role_id) VALUES
     (4, 2),   
     (5, 2),   
     (6, 2),   
-    (7, 2)^   
+    (7, 2)^
+
+INSERT INTO message (id, user_from_id, user_to_id, msg_text, read) VALUES
+    (1, 1, 2, 'Message 1', FALSE),
+    (2, 2, 3, 'Message 2', FALSE),
+    (3, 3, 4, 'Message 3', TRUE)^

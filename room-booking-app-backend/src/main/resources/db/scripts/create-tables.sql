@@ -28,6 +28,24 @@ CREATE SEQUENCE user_seq
    MAXVALUE 100000
    CACHE 1^
 
+CREATE TABLE message(
+    id INTEGER,
+    user_from_id INTEGER,
+    user_to_id INTEGER,
+    msg_text VARCHAR (255),
+    msg_date TIMESTAMP,
+    read BOOLEAN,
+    PRIMARY KEY (id),
+    FOREIGN KEY (user_from_id) REFERENCES sys_user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (user_to_id) REFERENCES sys_user(id) ON DELETE CASCADE ON UPDATE CASCADE
+)^
+
+CREATE SEQUENCE message_seq
+   INCREMENT 1
+   START 1
+   MINVALUE 1
+   MAXVALUE 100000
+   CACHE 1^
 
 
 
