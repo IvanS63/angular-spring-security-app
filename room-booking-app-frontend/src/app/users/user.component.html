@@ -5,9 +5,12 @@
                 <div class="col-sm-6">
                     <h2>Manage <b>Employees</b></h2>
                 </div>
-                <div class="col-sm-6" *ngIf="authority === 'admin'">
-                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
-                            class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+                <div class="col-sm-6">
+                    <div *ngIf="authority === 'admin'">
+                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
+                                class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+                    </div>
+                    <input type="button" class="btn btn-danger" (click)="logout()" value="Logout">
                 </div>
             </div>
         </div>
@@ -41,18 +44,6 @@
                 </tr>
             </tbody>
         </table>
-        <div class="clearfix">
-            <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-            <ul class="pagination">
-                <li class="page-item disabled"><a href="#">Previous</a></li>
-                <li class="page-item"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">4</a></li>
-                <li class="page-item"><a href="#" class="page-link">5</a></li>
-                <li class="page-item"><a href="#" class="page-link">Next</a></li>
-            </ul>
-        </div>
     </div>
 </div>
 

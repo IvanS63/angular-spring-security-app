@@ -10,7 +10,9 @@ import { TokenStorageService } from '../auth/token-storage.service';
     styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-    constructor(private userService: UserService, private tokenStorage: TokenStorageService) { }
+    constructor(private userService: UserService,
+        private tokenStorage: TokenStorageService,
+        private router: Router) { }
     users: User[];
     private user: User;
     form: any = {};
@@ -81,6 +83,11 @@ export class UserComponent implements OnInit {
                 }, error =>
                 console.error(error));
         window.location.reload();
+    }
+
+    logout() {
+        this.tokenStorage.signOut();
+        this.router.navigateByUrl("login");
     }
 
 }
