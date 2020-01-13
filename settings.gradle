@@ -1,4 +1,4 @@
 rootProject.name = 'room-booking-app'
-include 'room-booking-app-backend'
+include 'userapp-backend'
 include 'room-booking-app-frontend'
 

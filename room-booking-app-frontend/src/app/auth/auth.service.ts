@@ -15,8 +15,8 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class AuthService {
-    private loginUrl = 'http://localhost:8090/room-booking-app-backend/auth/login';
-    private signuoUrl = 'http://localhost:8090/room-booking-app-backend/auth/signup';
+    private loginUrl = 'http://localhost:8090/userapp-backend/auth/login';
+    private signuoUrl = 'http://localhost:8090/userapp-backend/auth/signup';
 
     constructor(private http: HttpClient) {
     }
@@ -28,4 +28,5 @@ export class AuthService {
     signUp(info: SignupDto): Observable<any> {
         return this.http.post<any>(this.signuoUrl, info, httpOptions);
     }
+
 }

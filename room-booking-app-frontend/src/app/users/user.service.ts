@@ -5,12 +5,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './user';
 import { map } from 'rxjs/operators';
 
-const USERS_BASE_URL = 'http://localhost:8090/room-booking-app-backend/ui/users';
+const USERS_BASE_URL = 'http://localhost:8090/userapp-backend/ui/users';
 const GET_ALL_USERS_URL = '/list';
 const DELETE_USER_URL = '/delete/';
 const ADD_USER_URL = '/add';
 const EDIT_USER_URL = '/edit/';
-const UPLOAD_FILE = '/upload';
+const UPLOAD_FILE = 'api/files/upload';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -43,7 +43,7 @@ export class UserService {
             headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data' }),
             withCredentials: true
         };
-        return this.httpClient.post<FormData>(USERS_BASE_URL + UPLOAD_FILE, formData);
+        return this.httpClient.post<FormData>(UPLOAD_FILE, formData);
     }
 
     private handleError(error: Response) {
