@@ -1,7 +1,9 @@
 package com.myapp.userapp.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -16,14 +18,15 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@ComponentScan(basePackages = {"com.myapp.userapp.dao","com.myapp.userapp.service"})
+@Import(SecurityConfig.class)
 public class IntegrationTestConfig {
-
-
+    
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
-        emf.setPackagesToScan("com.myapp.roombookingapp.entity");
+        emf.setPackagesToScan("com.myapp.userapp.entity");
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         emf.setJpaVendorAdapter(vendorAdapter);
         emf.setJpaProperties(getAdditionalProperties());

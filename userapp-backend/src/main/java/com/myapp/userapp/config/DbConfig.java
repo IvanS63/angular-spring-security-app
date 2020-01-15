@@ -2,6 +2,7 @@ package com.myapp.userapp.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -19,6 +20,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
+@ComponentScan(basePackages = {"com.myapp.userapp.dao","com.myapp.userapp.service"})
 public class DbConfig {
 
     @Value("${application.db.name:userapp}")

@@ -26,8 +26,7 @@ public class AuthControllerIntegrationTest extends BaseControllerIntegrationTest
                 .andExpect(jsonPath("$.login").value("admin"))
                 .andExpect(jsonPath("$.token").isNotEmpty());
     }
-
-
+    
     @Test
     public void test_signup() throws Exception {
         this.mockMvc.perform(post("/auth/signup")

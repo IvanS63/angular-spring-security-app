@@ -30,7 +30,6 @@ import java.util.Collections;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ComponentScan(basePackages = "com.myapp.userapp")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
