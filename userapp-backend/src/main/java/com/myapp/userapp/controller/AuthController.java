@@ -13,6 +13,7 @@ import com.myapp.userapp.util.enums.RoleName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -97,7 +98,7 @@ public class AuthController {
         user.setRoles(roles);
         userService.add(user);
 
-        return ResponseEntity.ok(user);
+        return new ResponseEntity(user, HttpStatus.CREATED);
     }
 
 

@@ -34,6 +34,7 @@ public class AuthControllerIntegrationTest extends BaseControllerIntegrationTest
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(new SignUpRequestDto("newuser", "12345", "test@email.com"))))
                 .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.login").value("newuser"));
     }
 }
