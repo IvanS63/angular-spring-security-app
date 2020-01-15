@@ -13,8 +13,8 @@ Simple example that represents Spring MVC+Security backend application which int
 
 ## Functionality
 The Application consists of sub-applications represented as Gradle sub-modules:
-1. room-booking-app-backend 
-2. room-booking-app-frontend
+1. userapp-backend 
+2. userapp-frontend
 
 ### Backend part
 - Keeps list of users (CRUD operations) through Hibernate Framework. Each users has either ADMIN or USER role for security purposes.
