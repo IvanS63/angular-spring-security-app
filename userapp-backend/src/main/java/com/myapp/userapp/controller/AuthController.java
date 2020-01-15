@@ -97,7 +97,7 @@ public class AuthController {
         user.setRoles(roles);
         userService.add(user);
 
-        return new ResponseEntity(user, HttpStatus.CREATED);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
 
