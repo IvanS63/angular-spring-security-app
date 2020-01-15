@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 /**
- * Unit tests for {@link AuthController} class.
+ * Integration tests for {@link AuthController} class.
  */
 public class AuthControllerIntegrationTest extends BaseControllerIntegrationTest {
 

@@ -26,6 +26,7 @@ public class FileService {
             multipartFile.transferTo(new File(storagePath + multipartFile.getOriginalFilename()));
         } catch (IOException e) {
             log.error(e.toString());
+            throw new RuntimeException(e);
         }
     }
 }
