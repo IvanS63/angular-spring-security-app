@@ -1,4 +1,4 @@
-package com.myapp.roombookingapp.util;
+package com.myapp.userapp.util;
 
 import org.hsqldb.util.DatabaseManagerSwing;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author Ivan_Semenov
  */
-@Component
+//@Component
 public class DatabaseManager {
 
     @Autowired
