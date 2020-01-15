@@ -82,7 +82,6 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponseDto(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
-    //TODO fix 403 after logging with new users
     @PostMapping("/signup")
     public ResponseEntity signup(@RequestBody SignUpRequestDto signUpRequestDto) {
         if (Objects.nonNull(userService.findByLogin(signUpRequestDto.getLogin()))) {

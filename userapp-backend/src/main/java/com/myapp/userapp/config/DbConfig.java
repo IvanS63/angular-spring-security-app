@@ -1,7 +1,9 @@
 package com.myapp.userapp.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -16,8 +18,11 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:application.properties")
 public class DbConfig {
 
+    @Value("${application.db.name:userapp}")
+    private String databaseName;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource dataSource) {
@@ -33,7 +38,7 @@ public class DbConfig {
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
-                .generateUniqueName(true) //TODO investidate why database creation fails if DB name was set via property
+                .setName(databaseName)
                 .setType(EmbeddedDatabaseType.H2) //.HSQLDB or .DERBY are also possible
                 .addScript("classpath:db/scripts/create-tables.sql")
                 .addScript("classpath:db/scripts/insert-initial-data.sql")

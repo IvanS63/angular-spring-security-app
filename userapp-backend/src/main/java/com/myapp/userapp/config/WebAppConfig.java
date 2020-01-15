@@ -15,9 +15,12 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import java.util.Locale;
 
+/**
+ * This configuration contains Servlet specific beans.
+ */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.myapp.userapp")
+@ComponentScan(basePackages = "com.myapp.userapp.controller")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 
     @Bean

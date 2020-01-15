@@ -17,7 +17,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     }
 
     /**
-     * Load middle and data-tier application context with beans defined in configuration classes
+     * The root application typically contains shared/general resources like DataSource, services, repositories, etc.
      */
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -25,8 +25,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     }
 
     /**
-     * Load web application context with beans defined
-     * in the {@link WebAppConfig} configuration class
+     * The servlet context contains beans specific for this context, generally things like view resolver, handler mappings, controllers etc.
      */
     @Override
     protected Class<?>[] getServletConfigClasses() {

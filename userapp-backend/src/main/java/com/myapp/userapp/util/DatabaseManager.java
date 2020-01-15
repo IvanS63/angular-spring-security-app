@@ -2,6 +2,7 @@ package com.myapp.userapp.util;
 
 import org.hsqldb.util.DatabaseManagerSwing;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author Ivan_Semenov
  */
-//@Component
+@Component
 public class DatabaseManager {
 
     @Autowired
