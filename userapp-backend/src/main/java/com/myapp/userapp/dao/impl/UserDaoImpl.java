@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -25,10 +26,8 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext(name = "myapp-persistence-unit")
     private EntityManager entityManager;
 
-    private static final String SELECT_USER_BY_LOGIN_QUERY =
-            "select * from sys_user where login like '?1'";
-
-
+    private static final String SELECT_USER_BY_LOGIN_QUERY = "select u from User u where u.login like :login";
+    
     @Override
     public User findById(Integer id) {
         return entityManager.find(User.class, id);
@@ -56,11 +55,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByLogin(String login) {
-        List<User> usersByLogin = entityManager.createQuery("select u from User u where u.login like :login")
-                .setParameter("login", login)
+        TypedQuery<User> query = entityManager.createQuery(SELECT_USER_BY_LOGIN_QUERY, User.class);
+        List<User> result = query.setParameter("login", login)
                 .getResultList();
-        if (!usersByLogin.isEmpty()) {
-            return usersByLogin.get(0);
+        if (!result.isEmpty()) {
+            return result.get(0);
         } else {
             log.warn("No user with login ={} has been found", login);
             return null;
