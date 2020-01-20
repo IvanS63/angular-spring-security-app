@@ -10,7 +10,7 @@ CREATE TABLE sys_user (
     login VARCHAR (10),
     password VARCHAR (255) DEFAULT '$2a$10$EblZqNptyYvcLm/VwDCVAuBjzZOI7khzdyGPBr08PpIi0na624b8.',
     name VARCHAR (50),
-    photo VARCHAR (255) DEFAULT 'assets/images/avatar1.png',
+    photo VARCHAR (255),
     PRIMARY KEY (id)
 )^
     

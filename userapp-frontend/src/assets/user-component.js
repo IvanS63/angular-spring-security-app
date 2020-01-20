@@ -6,9 +6,10 @@ $(document).on("click", ".delete", function () {
 
 /*Update modal form*/
 $(document).on("click", ".edit", function () {
-    $('input[name="id"]').val($(this).data("id"));
-    $('input[name="name"]').val($(this).data("name"));
-    $('input[name="email"]').val($(this).data("email"));
+    document.getElementById("id").value=$(this).data("id");
+    document.getElementById("login").value=$(this).data("login");
+    document.getElementById("name").value=$(this).data("name");
+    document.getElementById("email").value=$(this).data("email");
     $('img[name="photo"]').attr("src", $(this).data("photo"));
 });
 

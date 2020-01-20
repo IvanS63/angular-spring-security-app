@@ -37,7 +37,7 @@ public class User implements UserDetails {
     private String name;
 
     @Column(name = "photo")
-    private String photo;
+    private String photo= "assets/images/avatar1.png";
     
     //TODO refactor cascade type and add unique constraint to role name and logins
     @ManyToMany(fetch = FetchType.EAGER)

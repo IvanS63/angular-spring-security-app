@@ -5,11 +5,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './user';
 import { map } from 'rxjs/operators';
 
-const USERS_BASE_URL = 'http://localhost:8090/userapp-backend/ui/users';
-const GET_ALL_USERS_URL = '/list';
-const DELETE_USER_URL = '/delete/';
-const ADD_USER_URL = '/add';
-const EDIT_USER_URL = '/edit/';
+const BASE_URL = 'http://localhost:8090/userapp-backend/';
+const GET_ALL_USERS_URL = 'ui/users/list';
+const DELETE_USER_URL = 'ui/users/delete/';
+const ADD_USER_URL = 'ui/users/add';
+const EDIT_USER_URL = 'ui/users/edit/';
 const UPLOAD_FILE = 'api/files/upload';
 
 const httpOptions = {
@@ -23,27 +23,23 @@ export class UserService {
     constructor(private httpClient: HttpClient) { }
 
     getAllUsers() {
-        return this.httpClient.get(USERS_BASE_URL + GET_ALL_USERS_URL);
+        return this.httpClient.get(BASE_URL + GET_ALL_USERS_URL);
     }
 
     addUser(user: User) {
-        return this.httpClient.post<User>(USERS_BASE_URL + ADD_USER_URL, user, httpOptions);
+        return this.httpClient.post<User>(BASE_URL + ADD_USER_URL, user, httpOptions);
     }
 
-    updateUser(id: number, user: User) {
-        return this.httpClient.post<User>(USERS_BASE_URL + EDIT_USER_URL + id, user, httpOptions);
+    updateUser(id: string, user: User) {
+        return this.httpClient.put<User>(BASE_URL + EDIT_USER_URL + id, user, httpOptions);
     }
 
     deleteUser(id: number): Observable<any> {
-        return this.httpClient.delete(USERS_BASE_URL + DELETE_USER_URL + id);
+        return this.httpClient.delete(BASE_URL + DELETE_USER_URL + id);
     }
 
     uploadFile(formData: FormData) {
-        var multipartOptions = {
-            headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data' }),
-            withCredentials: true
-        };
-        return this.httpClient.post<FormData>(UPLOAD_FILE, formData);
+        return this.httpClient.post<FormData>(BASE_URL + UPLOAD_FILE, formData);
     }
 
     private handleError(error: Response) {

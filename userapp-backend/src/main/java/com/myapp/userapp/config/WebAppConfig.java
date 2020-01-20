@@ -45,13 +45,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         return localeResolver;
     }
 
-    @Bean(name = "filterMultipartResolver")
-    public CommonsMultipartResolver filterMultipartResolver() {
-        CommonsMultipartResolver filterMultipartResolver = new CommonsMultipartResolver();
-        filterMultipartResolver.setDefaultEncoding("utf-8");
-        //filterMultipartResolver.setMaxUploadSize(512000);
-        return filterMultipartResolver;
-    }
+
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {

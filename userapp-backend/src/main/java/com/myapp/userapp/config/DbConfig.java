@@ -13,6 +13,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -35,6 +36,15 @@ public class DbConfig {
         emf.setJpaVendorAdapter(vendorAdapter);
         emf.setJpaProperties(getAdditionalProperties());
         return emf;
+    }
+
+    //TODO remove it from here
+    @Bean(name = "filterMultipartResolver")
+    public CommonsMultipartResolver filterMultipartResolver() {
+        CommonsMultipartResolver filterMultipartResolver = new CommonsMultipartResolver();
+        filterMultipartResolver.setDefaultEncoding("utf-8");
+        //filterMultipartResolver.setMaxUploadSize(512000);
+        return filterMultipartResolver;
     }
 
     @Bean

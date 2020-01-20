@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from './user';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../auth/token-storage.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-user',
@@ -50,26 +51,32 @@ export class UserComponent implements OnInit {
         this.file = e.target.files[0];
     }
 
-    addUser() {
-        var id = this.form.id;
+    updateUser() {
+        var id = (<HTMLInputElement>document.getElementById("id")).value;
         var formData = new FormData();
         formData.append('file', this.file);
         var updateResult;
         this.user = new User(
-            this.form.login, this.form.name, this.form.email);
+            (<HTMLInputElement>document.getElementById("login")).value,
+            (<HTMLInputElement>document.getElementById("name")).value,
+            (<HTMLInputElement>document.getElementById("email")).value);
         if (id == null) {
             updateResult = this.userService.addUser(this.user);
         } else {
             updateResult = this.userService.updateUser(id, this.user);
         }
-        this.userService.uploadFile(formData)
-            .subscribe(response => console.log(response));
         updateResult.subscribe(response => {
-            window.location.reload();
-            console.log(response);
-        },
-            (error) => { console.log(error); }
-        );
+            this.userService.uploadFile(formData)
+                .subscribe(response => {
+                    console.log(response);
+                },
+                    (error) => { console.log(error); }
+                );
+
+        }, (error) => {
+            console.log(error);
+        })
+
     }
 
     deleteUser(id: number) {
