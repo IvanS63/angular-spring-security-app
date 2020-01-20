@@ -1,0 +1,9 @@
+task runBackend(type: GradleBuild) {
+    tasks = [':userapp-backend:clean',
+             ':userapp-backend:build',
+             ':userapp-backend:appRun']
+}
+
+task runFrontend(type: GradleBuild) {
+    tasks = [':userapp-frontend:start']
+}
