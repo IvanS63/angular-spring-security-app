@@ -2,7 +2,10 @@ package com.myapp.userapp.controller;
 
 import com.myapp.userapp.dto.LoginRequestDto;
 import com.myapp.userapp.dto.SignUpRequestDto;
+import com.myapp.userapp.entity.User;
+import com.myapp.userapp.service.domain.UserService;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -15,6 +18,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 public class AuthControllerIntegrationTest extends BaseControllerIntegrationTest {
 
+    @Autowired
+    private UserService userService;
+
     @Test
     public void test_login() throws Exception {
         this.mockMvc.perform(post("/auth/login")
@@ -26,7 +32,7 @@ public class AuthControllerIntegrationTest extends BaseControllerIntegrationTest
                 .andExpect(jsonPath("$.login").value("admin"))
                 .andExpect(jsonPath("$.token").isNotEmpty());
     }
-    
+
     @Test
     public void test_signup() throws Exception {
         this.mockMvc.perform(post("/auth/signup")
@@ -35,5 +41,8 @@ public class AuthControllerIntegrationTest extends BaseControllerIntegrationTest
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.login").value("newuser"));
+
+        User addedUser = userService.findByLogin("newuser");
+        userService.remove(addedUser.getId());
     }
 }
