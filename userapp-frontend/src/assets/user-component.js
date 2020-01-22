@@ -6,11 +6,13 @@ $(document).on("click", ".delete", function () {
 
 /*Update modal form*/
 $(document).on("click", ".edit", function () {
-    document.getElementById("id").value=$(this).data("id");
-    document.getElementById("login").value=$(this).data("login");
-    document.getElementById("name").value=$(this).data("name");
-    document.getElementById("email").value=$(this).data("email");
-    $('img[name="photo"]').attr("src", $(this).data("photo"));
+    if (!$(this).data("new")) {
+        document.getElementById("id").value = $(this).data("id");
+        document.getElementById("login").value = $(this).data("login");
+        document.getElementById("name").value = $(this).data("name");
+        document.getElementById("email").value = $(this).data("email");
+        $('img[name="photo"]').attr("src", $(this).data("photo"));
+    }
 });
 
 /*Avatar upload*/

@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div *ngIf="authority === 'admin'">
-                        <a href="#editEmployeeModal" class="btn btn-success" data-toggle="modal"><i
+                        <a href="#editEmployeeModal" class="btn btn-success" data-toggle="modal" [attr.data-new]="true"><i
                                 class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
                     </div>
                     <input type="button" class="btn btn-danger" (click)="logout()" value="Logout">
@@ -33,7 +33,7 @@
                     <td>89 Chiaroscuro Rd, Portland, USA</td>
                     <td>(171) 555-2222</td>
                     <td *ngIf="authority === 'admin'">
-                        <a href="#editEmployeeModal" data-toggle="#editEmployeeModal" [attr.data-id]="user.id"
+                        <a href="#editEmployeeModal" data-toggle="#editEmployeeModal" [attr.data-new]="true" [attr.data-id]="user.id"
                             [attr.data-login]="user.login" [attr.data-email]="user.email" [attr.data-name]="user.name"
                             [attr.data-photo]="user.photo" class="edit" data-toggle="modal"><i class="material-icons"
                                 data-toggle="tooltip" title="Edit">&#xE254;</i></a>
