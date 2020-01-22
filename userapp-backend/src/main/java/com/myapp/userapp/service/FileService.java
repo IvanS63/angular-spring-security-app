@@ -7,6 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,8 +17,17 @@ public class FileService {
 
     private static final Logger log = LoggerFactory.getLogger(FileService.class);
 
-    @Value("${application.image.storage.path:../}")
+    @Value("${application.image.storage.path}")
     private String storagePath;
+
+    @PostConstruct
+    public void init() {
+        if (storagePath.isEmpty() || !new File(storagePath).exists()) {
+            String error = "Please set the correct location to /src/assets/images frontend folder";
+            log.error(error);
+            throw new RuntimeException(error);
+        }
+    }
 
     public void saveFile(MultipartFile multipartFile) {
         log.debug("Received file: name={} size={}, saving to: {}",
