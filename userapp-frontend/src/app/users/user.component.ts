@@ -3,7 +3,8 @@ import { User } from './user';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../auth/token-storage.service';
-import { NgForm } from '@angular/forms';
+
+const DEFAULT_IMAGE_FOLDER = "assets/images/";
 
 @Component({
     selector: 'app-user',
@@ -59,7 +60,8 @@ export class UserComponent implements OnInit {
         this.user = new User(
             (<HTMLInputElement>document.getElementById("login")).value,
             (<HTMLInputElement>document.getElementById("name")).value,
-            (<HTMLInputElement>document.getElementById("email")).value);
+            (<HTMLInputElement>document.getElementById("email")).value,
+            DEFAULT_IMAGE_FOLDER + this.file.name);
         if (id == null) {
             updateResult = this.userService.addUser(this.user);
         } else {
