@@ -27,15 +27,16 @@ The Application consists of sub-applications represented as Gradle sub-modules:
 
 ### Frontend part
 - Represents application with login window and CRUD forms for the list of users (CRUD actions are available only for users with ADMIN role).
-- Default password - '12345'.
-- i18n is supported.
+- i18n is supported (implemented only for Login page).
 
 
 Workflow
 ========
 ## Run project
 1. Run **gradle runBackend** from project root directory (http://localhost:8090/userapp-backend).
-2. Run **gradle runFrontend** from project root directory (http://localhost:4200).
+2. Run **gradle runFrontend** from project root directory (http://localhost:4200). 
+    - To check user with ADMIN role: login with *admin*, *12345*
+    - To check user with USER role: login with *user*, *12345*
 
 ## Debug backend
 1. Run **gretty appRunDebug** gradle task.
