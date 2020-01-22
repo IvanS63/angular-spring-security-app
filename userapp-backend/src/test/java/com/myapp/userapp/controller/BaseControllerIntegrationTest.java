@@ -17,7 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 /**
  * Class for setting {@link MockMvc} and test H2 database.
  */
-@ContextConfiguration(classes = {IntegrationTestConfig.class})
+@ContextConfiguration(classes = {IntegrationTestConfig.class, WebAppConfig.class})
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("integration-test")
