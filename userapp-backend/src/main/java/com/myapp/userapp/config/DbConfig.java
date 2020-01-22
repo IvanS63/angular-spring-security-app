@@ -38,15 +38,6 @@ public class DbConfig {
         return emf;
     }
 
-    //TODO remove it from here
-    @Bean(name = "filterMultipartResolver")
-    public CommonsMultipartResolver filterMultipartResolver() {
-        CommonsMultipartResolver filterMultipartResolver = new CommonsMultipartResolver();
-        filterMultipartResolver.setDefaultEncoding("utf-8");
-        //filterMultipartResolver.setMaxUploadSize(512000);
-        return filterMultipartResolver;
-    }
-
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
