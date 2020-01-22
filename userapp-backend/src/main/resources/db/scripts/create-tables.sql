@@ -8,7 +8,7 @@ CREATE TABLE sys_user (
     id INTEGER,
     email VARCHAR(50),
     login VARCHAR (10),
-    password VARCHAR (255) DEFAULT '$2a$10$EblZqNptyYvcLm/VwDCVAuBjzZOI7khzdyGPBr08PpIi0na624b8.',
+    password VARCHAR (255),
     name VARCHAR (50),
     photo VARCHAR (255),
     PRIMARY KEY (id)
