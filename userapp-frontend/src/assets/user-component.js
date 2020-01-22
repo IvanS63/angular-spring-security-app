@@ -4,16 +4,25 @@ $(document).on("click", ".delete", function () {
     $('input[name="userId"]').val(selectedUserId);
 });
 
-/*Update modal form*/
+/*Populate data in edit form*/
 $(document).on("click", ".edit", function () {
-    if (!$(this).data("new")) {
-        document.getElementById("id").value = $(this).data("id");
-        document.getElementById("login").value = $(this).data("login");
-        document.getElementById("name").value = $(this).data("name");
-        document.getElementById("email").value = $(this).data("email");
-        $('img[name="photo"]').attr("src", $(this).data("photo"));
-    }
+    document.getElementById("id").value = $(this).data("id");
+    document.getElementById("login").value = $(this).data("login");
+    document.getElementById("name").value = $(this).data("name");
+    document.getElementById("email").value = $(this).data("email");
+    $('img[name="photo"]').attr("src", $(this).data("photo"));
+
 });
+
+/*Clear data in modal form*/
+$(document).on("click", ".add", function () {
+    $("#id").val = null;
+    $("#login").val = null;
+    $("#name").val == null;
+    $("#email").val = null;
+    $('img[name="photo"]').attr("src", null);
+});
+
 
 /*Avatar upload*/
 $(document).ready(function () {

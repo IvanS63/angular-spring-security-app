@@ -56,23 +56,23 @@ export class UserComponent implements OnInit {
 
     updateUser() {
         var id = (<HTMLInputElement>document.getElementById("id")).value;
-        if (this.file != null) {
+        this.user = new User(
+            (<HTMLInputElement>document.getElementById("login")).value,
+            (<HTMLInputElement>document.getElementById("name")).value,
+            (<HTMLInputElement>document.getElementById("email")).value);
+        if (this.file != undefined) {
             var formData = new FormData();
             formData.append('file', this.file);
             this.user.photo = DEFAULT_IMAGE_FOLDER + this.file.name;
         }
         var updateResult;
-        this.user = new User(
-            (<HTMLInputElement>document.getElementById("login")).value,
-            (<HTMLInputElement>document.getElementById("name")).value,
-            (<HTMLInputElement>document.getElementById("email")).value);
-        if (id == null) {
+        if (id == undefined || id === "") {
             updateResult = this.userService.addUser(this.user);
         } else {
             updateResult = this.userService.updateUser(id, this.user);
         }
         updateResult.subscribe(response => {
-            if (this.file != null) {
+            if (this.file != undefined) {
                 this.userService.uploadFile(formData)
                     .subscribe(response => {
                         console.log(response);
@@ -80,6 +80,9 @@ export class UserComponent implements OnInit {
                         (error) => { console.log(error); }
                     );
             }
+            this.userService.getAllUsers().subscribe((data: User[]) => {
+                this.users = data
+            })
             this.closeEditButton.nativeElement.click();
 
         }, (error) => {
