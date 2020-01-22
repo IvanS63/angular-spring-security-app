@@ -6,6 +6,7 @@ import com.myapp.userapp.config.WebAppConfig;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -16,9 +17,10 @@ import org.springframework.web.context.WebApplicationContext;
 /**
  * Class for setting {@link MockMvc} and test H2 database.
  */
-@ContextConfiguration(classes = {IntegrationTestConfig.class, WebAppConfig.class})
+@ContextConfiguration(classes = {IntegrationTestConfig.class})
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles("integration-test")
 public abstract class BaseControllerIntegrationTest {
 
     @Autowired

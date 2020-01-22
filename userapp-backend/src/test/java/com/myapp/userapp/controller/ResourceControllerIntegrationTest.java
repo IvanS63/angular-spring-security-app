@@ -35,7 +35,7 @@ public class ResourceControllerIntegrationTest extends BaseControllerIntegration
     @Before
     public void init() {
         resourceDirectoryPath = Paths.get("src", "test", "resources").toString().concat("/");
-        ReflectionTestUtils.setField(fileService, "storagePath", resourceDirectoryPath);
+        ReflectionTestUtils.setField(fileService, "pathToImageFolder", resourceDirectoryPath);
     }
 
     @Test

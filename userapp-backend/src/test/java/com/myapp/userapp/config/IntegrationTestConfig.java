@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -18,8 +19,9 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.myapp.userapp.dao","com.myapp.userapp.service"})
-@Import(SecurityConfig.class)
+@ComponentScan(basePackages = {"com.myapp.userapp.dao","com.myapp.userapp.service", "com.myapp.userapp.controller"})
+@Import({SecurityConfig.class, LocaleConfig.class})
+@Profile("integration-test")
 public class IntegrationTestConfig {
     
     @Bean
