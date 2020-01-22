@@ -20,6 +20,8 @@ export class UserComponent implements OnInit {
     form: any = {};
     private authority: string;
     private file: File;
+    @ViewChild('closeDeleteButton', { static: false }) closeDeleteButton;
+    @ViewChild('closeEditButton', { static: false }) closeEditButton;
 
     getUsers(): void {
         this.userService.getAllUsers()
@@ -54,26 +56,31 @@ export class UserComponent implements OnInit {
 
     updateUser() {
         var id = (<HTMLInputElement>document.getElementById("id")).value;
-        var formData = new FormData();
-        formData.append('file', this.file);
+        if (this.file != null) {
+            var formData = new FormData();
+            formData.append('file', this.file);
+            this.user.photo = DEFAULT_IMAGE_FOLDER + this.file.name;
+        }
         var updateResult;
         this.user = new User(
             (<HTMLInputElement>document.getElementById("login")).value,
             (<HTMLInputElement>document.getElementById("name")).value,
-            (<HTMLInputElement>document.getElementById("email")).value,
-            DEFAULT_IMAGE_FOLDER + this.file.name);
+            (<HTMLInputElement>document.getElementById("email")).value);
         if (id == null) {
             updateResult = this.userService.addUser(this.user);
         } else {
             updateResult = this.userService.updateUser(id, this.user);
         }
         updateResult.subscribe(response => {
-            this.userService.uploadFile(formData)
-                .subscribe(response => {
-                    console.log(response);
-                },
-                    (error) => { console.log(error); }
-                );
+            if (this.file != null) {
+                this.userService.uploadFile(formData)
+                    .subscribe(response => {
+                        console.log(response);
+                    },
+                        (error) => { console.log(error); }
+                    );
+            }
+            this.closeEditButton.nativeElement.click();
 
         }, (error) => {
             console.log(error);
@@ -89,9 +96,10 @@ export class UserComponent implements OnInit {
                     this.userService.getAllUsers().subscribe((data: User[]) => {
                         this.users = data
                     })
-                }, error =>
-                console.error(error));
-        window.location.reload();
+                    this.closeDeleteButton.nativeElement.click();
+                }, error => {
+                    console.error(error)
+                });
     }
 
     logout() {

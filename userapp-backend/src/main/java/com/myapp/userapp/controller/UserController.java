@@ -28,14 +28,15 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getAll());
     }
 
+    //TODO fix add
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
     public void add(@RequestBody User user) {
         userService.add(user);
     }
-
+    
     @PutMapping("/edit/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public void edit(@PathVariable Integer id, @RequestBody User user) {
         user.setId(id);
         userService.edit(user);

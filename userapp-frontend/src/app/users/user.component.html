@@ -7,8 +7,9 @@
                 </div>
                 <div class="col-sm-6">
                     <div *ngIf="authority === 'admin'">
-                        <a href="#editEmployeeModal" class="btn btn-success" data-toggle="modal" [attr.data-new]="true"><i
-                                class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+                        <a href="#editEmployeeModal" class="btn btn-success" data-toggle="modal"
+                            [attr.data-new]="true"><i class="material-icons">&#xE147;</i> <span>Add New
+                                Employee</span></a>
                     </div>
                     <input type="button" class="btn btn-danger" (click)="logout()" value="Logout">
                 </div>
@@ -33,10 +34,11 @@
                     <td>89 Chiaroscuro Rd, Portland, USA</td>
                     <td>(171) 555-2222</td>
                     <td *ngIf="authority === 'admin'">
-                        <a href="#editEmployeeModal" data-toggle="#editEmployeeModal" [attr.data-new]="false" [attr.data-id]="user.id"
-                            [attr.data-login]="user.login" [attr.data-email]="user.email" [attr.data-name]="user.name"
-                            [attr.data-photo]="user.photo" class="edit" data-toggle="modal"><i class="material-icons"
-                                data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                        <a href="#editEmployeeModal" data-toggle="#editEmployeeModal" [attr.data-new]="false"
+                            [attr.data-id]="user.id" [attr.data-login]="user.login" [attr.data-email]="user.email"
+                            [attr.data-name]="user.name" [attr.data-photo]="user.photo" class="edit"
+                            data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
+                                title="Edit">&#xE254;</i></a>
                         <a href="#deleteEmployeeModal" data-toggle="#deleteEmployeeModal" [attr.data-user]="user.id"
                             class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
                                 title="Delete">&#xE872;</i></a>
@@ -53,8 +55,9 @@
         <div class="modal-content">
             <form name="form" (ngSubmit)="updateUser()" #updateForm="ngForm">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Employee</h4>
+                    <button type="button" class="close" #closeEditButton data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="avatar-wrapper">
@@ -80,20 +83,21 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-success" value="Add">
+                    <input type="submit" class="btn btn-success" value="Done">
                 </div>
             </form>
         </div>
     </div>
 </div>
 <!-- Delete Modal HTML -->
-<div id="deleteEmployeeModal" data-backdrop="static" class="modal fade">
+<div id="deleteEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <form>
                 <div class="modal-header">
                     <h4 class="modal-title">Delete User</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="close" #closeDeleteButton data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" #userToDelete name="userId" />
