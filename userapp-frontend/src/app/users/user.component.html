@@ -33,7 +33,7 @@
                     <td>89 Chiaroscuro Rd, Portland, USA</td>
                     <td>(171) 555-2222</td>
                     <td *ngIf="authority === 'admin'">
-                        <a href="#editEmployeeModal" data-toggle="#editEmployeeModal" [attr.data-new]="true" [attr.data-id]="user.id"
+                        <a href="#editEmployeeModal" data-toggle="#editEmployeeModal" [attr.data-new]="false" [attr.data-id]="user.id"
                             [attr.data-login]="user.login" [attr.data-email]="user.email" [attr.data-name]="user.name"
                             [attr.data-photo]="user.photo" class="edit" data-toggle="modal"><i class="material-icons"
                                 data-toggle="tooltip" title="Edit">&#xE254;</i></a>
