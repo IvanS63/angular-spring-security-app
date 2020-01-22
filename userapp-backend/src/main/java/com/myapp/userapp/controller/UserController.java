@@ -28,7 +28,6 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getAll());
     }
 
-    //TODO fix add
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
     public void add(@RequestBody User user) {

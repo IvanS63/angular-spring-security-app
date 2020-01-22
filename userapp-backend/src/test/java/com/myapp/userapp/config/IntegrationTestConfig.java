@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.myapp.userapp.dao","com.myapp.userapp.service", "com.myapp.userapp.controller"})
+@ComponentScan(basePackages = {"com.myapp.userapp.dao","com.myapp.userapp.service"})
 @Import({SecurityConfig.class, LocaleConfig.class})
 @Profile("integration-test")
 public class IntegrationTestConfig {
