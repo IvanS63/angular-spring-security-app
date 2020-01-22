@@ -8,7 +8,7 @@ Simple example that represents Spring MVC+Security backend application which int
 - Spring Security
 - Hibernate
 - HSQLDB
-- Angular 7 + Bootstrap
+- Angular 7 + Bootstrap + JQuery
 
 
 ## Functionality
@@ -18,10 +18,11 @@ The Application consists of sub-applications represented as Gradle sub-modules:
 
 ### Backend part
 - Keeps list of users (CRUD operations) through Hibernate Framework. Each users has either ADMIN or USER role for security purposes.
-- Initial database is created and populated by SQL scripts within resources folder.
-- Controller endpoints are secured by Spring security annotations (security logic is implemented via JWT auth token).
-- HSQLDB is used as Database.
+- Initial database is created and populated by SQL scripts within resources folder (HSQL is used as application DB).
+- Controller endpoints are secured by Spring security annotations (security logic is implemented via JWT auth token filter).
+- File upload is supported.
 - Spring i18n is supported.
+- Integration tests provided.
 
 
 ### Frontend part
@@ -32,5 +33,13 @@ The Application consists of sub-applications represented as Gradle sub-modules:
 
 Workflow
 ========
-1. Run **gradle appRun** from room-booking-app-backend directory.
-2. Run **ng serve --open** from room-booking-app-frontend directory.
+## Run project
+1. Run **gradle runBackend** from project root directory (http://localhost:8090/userapp-backend).
+2. Run **gradle runFrontend** from project root directory (http://localhost:4200).
+
+## Debug backend
+1. Run **gretty appRunDebug** gradle task.
+2. Run following remote debug configuration in IDEA: 
+```
+-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+```
