@@ -1,6 +1,7 @@
 package com.myapp.userapp.service.security;
 
 import com.myapp.userapp.entity.User;
+import com.myapp.userapp.util.GenerateJwtSecret;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -27,7 +28,8 @@ public class JwtProvider {
 
     private static final Logger log = LoggerFactory.getLogger(JwtProvider.class);
 
-    @Value("${app.jwtSecret}")
+    //@Value("${app.jwtSecret}")
+    @GenerateJwtSecret(values = {"jwtSecretExample1", "jwtSecretExample2"}) //just to illustrate bean post processing example
     private String jwtSecret;
 
     @Value("${app.jwtExpiration}")
