@@ -1,7 +1,9 @@
-package com.myapp.userapp.service;
+package com.myapp.userapp.service.domain.impl;
 
 import static java.lang.String.format;
 
+import com.myapp.userapp.service.domain.FileService;
+import com.myapp.userapp.util.Profiling;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,9 @@ import java.util.Arrays;
 
 @Component
 @PropertySource("classpath:application.properties")
-public class FileService {
-    private static final Logger log = LoggerFactory.getLogger(FileService.class);
+@Profiling
+public class FileServiceImpl implements FileService {
+    private static final Logger log = LoggerFactory.getLogger(FileServiceImpl.class);
 
     @Value("${application.image.storage.path}")
     private String imagePathOnFrontend;
@@ -47,6 +50,7 @@ public class FileService {
         }
     }
 
+    @Override
     public void saveFile(MultipartFile multipartFile) {
         log.debug("Received file: name={} size={}, saving to: {}",
                 multipartFile.getOriginalFilename(), multipartFile.getSize(), pathToImageFolder);
