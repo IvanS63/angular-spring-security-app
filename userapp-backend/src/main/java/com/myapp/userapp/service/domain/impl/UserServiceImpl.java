@@ -3,6 +3,7 @@ package com.myapp.userapp.service.domain.impl;
 import com.myapp.userapp.dao.UserDao;
 import com.myapp.userapp.entity.User;
 import com.myapp.userapp.service.domain.UserService;
+import com.myapp.userapp.util.annotations.Profiling;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author Ivan_Semenov
  */
 @Service
+@Profiling
 public class UserServiceImpl implements UserService {
 
     @Autowired

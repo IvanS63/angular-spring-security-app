@@ -44,3 +44,6 @@ Workflow
 ```
 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
 ```
+
+###Profling
+To enable profiling (implemented via Proxies and Spring BeanPostProcessors) enable ```application.profiling.enabled``` property in **application.properties** 

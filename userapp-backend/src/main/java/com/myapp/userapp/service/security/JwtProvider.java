@@ -1,7 +1,7 @@
 package com.myapp.userapp.service.security;
 
 import com.myapp.userapp.entity.User;
-import com.myapp.userapp.util.GenerateJwtSecret;
+import com.myapp.userapp.util.annotations.GenerateJwtSecret;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;

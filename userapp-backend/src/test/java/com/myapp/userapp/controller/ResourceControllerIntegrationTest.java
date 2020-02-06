@@ -1,6 +1,6 @@
 package com.myapp.userapp.controller;
 
-import com.myapp.userapp.service.FileService;
+import com.myapp.userapp.service.domain.FileService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

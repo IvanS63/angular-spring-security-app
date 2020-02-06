@@ -1,6 +1,6 @@
 package com.myapp.userapp.controller;
 
-import com.myapp.userapp.service.FileService;
+import com.myapp.userapp.service.domain.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
