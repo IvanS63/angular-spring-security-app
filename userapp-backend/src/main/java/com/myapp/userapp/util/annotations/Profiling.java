@@ -1,4 +1,4 @@
-package com.myapp.userapp.util;
+package com.myapp.userapp.util.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

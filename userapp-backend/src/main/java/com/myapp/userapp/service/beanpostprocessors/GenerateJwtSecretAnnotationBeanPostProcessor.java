@@ -1,7 +1,7 @@
-package com.myapp.userapp.service.util;
+package com.myapp.userapp.service.beanpostprocessors;
 
 import com.myapp.userapp.service.security.JwtProvider;
-import com.myapp.userapp.util.GenerateJwtSecret;
+import com.myapp.userapp.util.annotations.GenerateJwtSecret;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;

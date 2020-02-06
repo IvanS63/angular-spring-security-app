@@ -23,7 +23,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = {"com.myapp.userapp.dao","com.myapp.userapp.service"})
 @Import({SecurityConfig.class, LocaleConfig.class})
 @Profile("integration-test")
-@TestPropertySource("application-test.properties")
+@TestPropertySource("application.properties")
 public class IntegrationTestConfig {
     
     @Bean

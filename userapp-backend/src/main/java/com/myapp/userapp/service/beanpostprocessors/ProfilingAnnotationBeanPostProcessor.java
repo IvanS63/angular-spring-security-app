@@ -1,17 +1,20 @@
-package com.myapp.userapp.service.util;
+package com.myapp.userapp.service.beanpostprocessors;
 
 import static java.lang.String.format;
 
-import com.myapp.userapp.util.Profiling;
+import com.myapp.userapp.util.annotations.Profiling;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Implementation of {@link BeanPostProcessor} which creates Proxies of {@link Profiling}-annotated classes
@@ -22,10 +25,22 @@ import java.util.Map;
 @Component
 public class ProfilingAnnotationBeanPostProcessor implements BeanPostProcessor {
 
-    @Value("${application.profiling.enabled:false}")
-    private boolean profilingEnabled;
+    private static final Logger log = LoggerFactory.getLogger(ProfilingAnnotationBeanPostProcessor.class);
 
+    private Boolean profilingEnabled;
     private Map<String, Class> proxyMap = new HashMap<>();
+
+    public ProfilingAnnotationBeanPostProcessor() {
+        final String property = "application.profiling.enabled";
+        Properties properties = new Properties();
+        try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties")) {
+            properties.load(is);
+            profilingEnabled = Boolean.valueOf(properties.getProperty(property, "false"));
+        } catch (IOException ex) {
+            log.error(format("Cannot read %s from property file", property));
+            profilingEnabled = false;
+        }
+    }
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {

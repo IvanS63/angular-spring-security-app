@@ -3,7 +3,6 @@ package com.myapp.userapp.service.domain.impl;
 import static java.lang.String.format;
 
 import com.myapp.userapp.service.domain.FileService;
-import com.myapp.userapp.util.Profiling;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ import java.util.Arrays;
 
 @Component
 @PropertySource("classpath:application.properties")
-@Profiling
 public class FileServiceImpl implements FileService {
     private static final Logger log = LoggerFactory.getLogger(FileServiceImpl.class);
 
